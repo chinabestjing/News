@@ -1,0 +1,66 @@
+<include file="Common/header" />
+<link rel="stylesheet" href="__PUBLIC__/page.css" />
+<div id="right-content">
+    <div class="top">
+        <h2>用户管理 <small>预约列表</small></h2>
+    </div>
+   <!-- <ul class="nav nav-tabs mt10">
+        <li role="presentation">
+            <a href="__CONTROLLER__/add" >发布新闻</a>
+        </li>
+    </ul>-->
+
+    <form action="" method="post">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#N</th>
+                    <th>预约人</th>
+                 <!--   <th>发布人</th>-->
+                    <th>联系电话</th>
+                  <!--  <th>阅读量</th>
+                    <th>点赞量</th>-->
+                    <th>是否确认通过</th>
+                    <th>预约时间</th>
+                    <th width="200">操作</th>
+                </tr>
+                </thead>
+                <volist name="data" id="vo" key="k">
+                    <tr>
+
+                        <td>{$k}</td>
+                        <td>{$vo.m_name}</td>
+                        <td>{$vo.m_phone}</td>
+                        <td>
+                            <eq name="vo.m_state" value="1">
+                                <span style="cursor:pointer;" class="label label-success f12">已确认</span>
+                                <else />
+                                <span style="cursor:pointer;" class="label label-danger f12">待审核</span>
+                            </eq>
+                        </td>
+
+
+                        <td>{$vo.m_time|date='Y-m-d H:i:s',###}</td>
+                        <td class="handle">
+
+                            <a href="{:U('AdminUser/yuyueEdit',array('m_id'=>$vo['m_id']))}" class="edit"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+                            <a href="javascript:;" class="del" onclick="if(confirm('确定删除吗？')) location.href='{:U('AdminUser/yuyueDel', array('m_id'=>$vo['m_id']))}'">
+                                <i class="glyphicon glyphicon-trash"></i>删除
+                            </a>
+                        </td>
+                    </tr>
+                </volist>
+                <tr>
+                    <div class="meneame">{$page}</div>
+                </tr>
+            </table>
+            <div class="meneame">{$page}</div>
+        </div>
+    </form>
+</div>
+
+
+
+<include file="Common/footer" />
+

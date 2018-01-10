@@ -1,0 +1,90 @@
+<include file="Common/header" />
+<script>
+    //文件上传插件
+    KindEditor.ready(function(K) {
+        var editor = K.editor({
+            allowFileManager : true
+        });
+        K('#insertfile').click(function() {
+            editor.loadPlugin('insertfile', function() {
+                editor.plugin.fileDialog({
+                    fileUrl : K('#url').val(),
+                    clickFn : function(url, title) {
+                        K('#url').val(url);
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });
+        editor = K.create('textarea[name="i_text1"]', {
+            allowFileManager : true
+        });
+    });
+</script>
+	<div id="right-content">
+		<div class="top">
+			<h2>人力资源 <small>校园招聘</small></h2>
+		</div>
+
+		<form action="__ACTION__" method="post">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>设置项</th>
+						<th>设置值</th>
+					</tr>
+				</thead>
+                <tr>
+                    <td width="150">标题</td>
+                    <td>
+                        <input type="text" name="i_title1" class="form-control w400 fl" value="{$data['i_title1']}">
+                        <b class="fl ml10 mt10" style="color: red;">*</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>内容</td>
+                    <td>
+                        <div class="col-sm-10">
+                            <textarea name="i_text1" style="width:800px;height:400px;visibility:hidden;">{$data.i_text1}</textarea>
+                            <p>
+                                <input type="button" name="clear" value="清空内容" />
+                                <input type="reset" name="reset" value="Reset" />
+                            </p>
+                            <!-- <script type="text/plain" id="container" name="i_text1" style="width:100%;height:500px;">{$data.i_text1}</script>-->
+                        </div>
+                    </td>
+                </tr>
+				<tr>
+					<td width="150">文件访问域名设置：（http://）</td>
+					<td>
+						<input type="text" name="i_url" class="form-control w400" value="{$data.i_pic.0.0}"  placeholder="http://www.bashuart.com" ><span style="color: #ff0000">请填对，避免作品不能访问情况</span>
+					</td>
+
+				</tr>
+                <tr>
+                    <td>文件上传1</td>
+                    <td>
+                        <input type="text" name="url1" id="url" value="{$data.i_pic.0.1}"  />
+                        <input type="button" id="insertfile" value="选择文件" />
+                    </td>
+                </tr>
+               <!-- <tr>
+                    <td>文件上传2</td>
+                    <td>
+                        <input type="text" name="url2" id="url" value="{$data.i_pic.1.1}" />
+                        <input type="button" id="insertfile" value="选择文件" />
+                    </td>
+                </tr>-->
+				<tr>
+					<td></td>
+					<td>
+						<button type="submit" class="btn btn-primary w100">修改</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</div>
+
+<include file="Common/footer" />

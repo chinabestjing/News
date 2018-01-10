@@ -1,0 +1,1 @@
+KISSY.add("pm-right-banner",["node"],function(n,t){function e(){this.init.apply(this,arguments)}var i=t("node"),o=i.all;return e.prototype={init:function(n){var t=this;t._node=i.one(n);var e=o("#pm-right-banner");e.length&&(e[0].style.height=document.body.scrollHeight+"px")}},e});

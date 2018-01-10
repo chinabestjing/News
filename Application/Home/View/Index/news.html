@@ -1,0 +1,390 @@
+<html>
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/text.css">
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>news</title>
+		<meta name="keywords" content="司法拍卖辅助平台" data-vue-meta="true">
+		<link rel="shortcut icon" href="img/logo.ico" type="img/x-icon">
+		<script src="https://hm.baidu.com/hm.js?25267f815d19ca3f16af3eea13a101b8"></script>
+		<script async="" charset="utf-8" src="js/udeskApi.js"></script>
+		<script src="js/redirect.js"></script>
+		<script src="js/polyfill.min.js"></script>
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/common.js"></script>
+		<style type="text/css">
+			.alert-wrap {
+				height: 662px
+			}
+		</style>
+		<link href="css/one.css" rel="stylesheet">
+		<style type="text/css">
+			.el-vue-amap-container,
+			.el-vue-amap-container .el-vue-amap {
+				height: 100%
+			}
+		</style>
+		<style type="text/css">
+			.el-vue-search-box-container {
+				position: relative;
+				width: 360px;
+				height: 45px;
+				background: #fff;
+				box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+				border-radius: 2px 3px 3px 2px;
+				z-index: 10
+			}
+			
+			.el-vue-search-box-container .search-box-wrapper {
+				position: absolute;
+				display: flex;
+				align-items: center;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				box-sizing: border-box
+			}
+			
+			.el-vue-search-box-container .search-box-wrapper input {
+				flex: 1;
+				height: 20px;
+				line-height: 20px;
+				letter-spacing: .5px;
+				font-size: 14px;
+				text-indent: 10px;
+				box-sizing: border-box;
+				border: none;
+				outline: none
+			}
+			
+			.el-vue-search-box-container .search-box-wrapper .search-btn {
+				width: 45px;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: transparent;
+				cursor: pointer
+			}
+			
+			.el-vue-search-box-container .search-tips {
+				position: absolute;
+				top: 100%;
+				border: 1px solid #dbdbdb;
+				background: #fff;
+				overflow: auto
+			}
+			
+			.el-vue-search-box-container .search-tips ul {
+				padding: 0;
+				margin: 0
+			}
+			
+			.el-vue-search-box-container .search-tips ul li {
+				height: 40px;
+				line-height: 40px;
+				box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+				padding: 0 10px;
+				cursor: pointer
+			}
+			
+			.el-vue-search-box-container .search-tips ul li.autocomplete-selected {
+				background: #eee
+			}
+		</style>
+		<meta name="description" content="司法拍卖辅助平台" data-vue-meta="true">
+		<style type="text/css">
+			.amap-container {
+				cursor: url(https://webapi.amap.com/theme/v1.3/openhand.cur), default;
+			}
+			
+			.amap-drag {
+				cursor: url(https://webapi.amap.com/theme/v1.3/closedhand.cur), default;
+			}
+		</style>
+		<script src="http://laipaiya.udesk.cn/agents/free?callback=udesk_jsonp1"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<div>
+				<div>
+					<div class="nav index-nav">
+						<div class="container clear-both">
+							<div class="nav-left">
+								<a href="" class="logo-main inline-block m-r-10 router-link-active"><img src="img/logo-main.png"></a>
+								<div class="nav-list inline-block">
+									<a href="index.html" class="nav-list-item router-link-active">首页</a>
+									<a href="court.html" class="nav-list-item">法院</a>
+									<a href="list.html" class="nav-list-item">货品·预约</a>
+									<a href="sign.html" tag="a" target="_blank" class="nav-list-item">法院监管</a>
+									<a href="corporation.html" class="nav-list-item">招聘英才</a>
+									<a href="cooperation.html" class="nav-list-item">联系我们</a>
+								</div>
+							</div>
+							<div class="nav-right  clear-both">
+								<div class="nav-login inline-block  cursor-pointer"><i class="material-icons float-blcok">perm_identity</i>
+									<!---->
+									<a href="login.html" class="float-blcok vertical-middle login">登录</a>
+									<a> | </a>
+									<!---->
+									<a href="login.html" class="vertical-middle sign">注册</a>
+								</div>
+								<div class="nav-search"><input type="text" placeholder="搜索标的物"> <i class="material-icons nav-search-icon cursor-pointer">search</i></div>
+							</div>
+						</div>
+						<div class="login-wrap">
+							<div class="login-window i-tab">
+								<div class="common-tab">
+									<div class="common-tab-btn sign-login-btn login-sign-active">用户登录</div>
+									<div class="common-tab-btn sign-login-btn">用户注册</div>
+								</div>
+								<div class="common-tab-item" style="display: block;"><input type="text" placeholder="请输入手机号码" class="input-border m-t-60"> <input type="text" placeholder="请输入登录密码" class="input-border m-t-20">
+									<div class="btn btn-red m-t-20 cursor-pointer">登录</div>
+								</div>
+								<div class="common-tab-item"><input type="text" placeholder="请输入手机号码" class="input-border m-t-20 sign-phonenum">
+									<div class="position-relative"><input type="text" class="input-border m-t-20"> <span class="color-white bg-red get-phone-code-btn">获取验证码</span></div> <input type="text" placeholder="请输入登录密码" class="input-border m-t-20"> <input type="text" placeholder="请重新输入密码" class="input-border m-t-20">
+									<div class="btn btn-red m-t-20 cursor-pointer">注册</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="container m-t-15 m-b-30 clear-both">
+					<div class="left-list">
+						<div class="list-sort shadow"><span class="m-l-22">
+                找到  <span class="color-orange size1_7em">27</span> 条网拍资讯
+							</span>
+						</div>
+						<ul class="news-list">
+							<li class="shadow clear-both">
+								<div class="news-list-img bg" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1512111804_459.jpg&quot;);"></div>
+								<div class="news-list-body">
+									<a href="newsdetail?id=29" class="production-list-name" targer="_blank">夫妇欠六千万失踪 别墅只留看门人被强制评估</a>
+									<p class="newslist-parameter"><span style="font-size:18px;">　　<br>　　段某夫妇和其公司欠债6000余万元，债权人虽拿到生效的仲裁书，但一直没能拿回属于自己的钱，无奈之下只得向市一中院申请强制执行。对于执行法官，段某夫妇也采取拖延战术，始终不露面。无奈之下，执行法官决定对段某夫妇公司名下的一处别墅进行强制评估，以便进行司法拍卖。昨天，北京晨报记者</span></p>
+									<div class="newslist-footer-left">发布时间：2017-12-1 15:3</div>
+								</div>
+							</li>
+							<li class="shadow clear-both">
+								<div class="news-list-img bg" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1506325489_846.jpg&quot;);"></div>
+								<div class="news-list-body">
+									<a href="newsdetail?id=28" class="production-list-name" targer="_blank">给网络司法拍卖打上制度补丁</a>
+									<p class="newslist-parameter"><span style="font-size:16px;">　　<br>　　作者：司法部《中国司法》杂志总编、研究员　刘武俊<br>　　<br>　　前不久，江苏省南京市秦淮区人民法院在淘宝网司法拍卖一部苹果7手机，竟然拍出了27万余元的天价。秦淮区法院通报了相关调查结果,对恶作剧者刘某某、车某某分别给予罚款2万元、1万</span></p>
+									<div class="newslist-footer-left">发布时间：2017-9-25 15:44</div>
+								</div>
+							</li>
+							<li class="shadow clear-both">
+								<div class="news-list-img bg" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1504835416_482.jpg&quot;);"></div>
+								<div class="news-list-body">
+									<a href="newsdetail?id=27" class="production-list-name" targer="_blank">上海司法拍卖房产首次引入按揭贷款</a>
+									<p class="newslist-parameter"><span style="font-size:16px;"><br>　　<br>　　据《劳动报》报道，“网络司法拍卖拍得的房产，也可以按揭贷款？”昨天，随着上海徐汇法院向竞买人刘东（化名）出具拍卖成交确认书，上海法院首例引入银行贷款的网络司法拍卖在公拍网拍卖成功。“拿到成交确认书，就可以办理过户手续啦！”刘东激动地对记者说。</span></p>
+									<div class="newslist-footer-left">发布时间：2017-9-8 9:50</div>
+								</div>
+							</li>
+							<li class="shadow clear-both">
+								<div class="news-list-img bg" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1502330262_598.jpg&quot;);"></div>
+								<div class="news-list-body">
+									<a href="newsdetail?id=26" class="production-list-name" targer="_blank">徐州铜山法院率先推行“互联网+司法拍卖线下辅助服务机制”</a>
+									<p class="newslist-parameter"><span style="font-size:16px;"></span></p>
+									<div class="newslist-footer-left">发布时间：2017-8-10 9:57</div>
+								</div>
+							</li>
+							<li class="shadow clear-both">
+								<div class="news-list-img bg" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1501466527_820.jpg&quot;);"></div>
+								<div class="news-list-body">
+									<a href="newsdetail?id=25" class="production-list-name" targer="_blank">住房限购政策是否适用于“司法拍卖房”</a>
+									<p class="newslist-parameter"><span style="font-size:16px;"><br>　　前不久，一份《关于明确〈关于进一步加强房地产市场调控的通知〉操作有关事项的通知》在网络上流传，引起广泛关注。<br>　　<br>　　通知中明确“因司法拍卖取得不动产的，按住房限购政策执行，购房者需具有购房资格；同时，取得者需在取得不动产证书满3年后</span></p>
+									<div class="newslist-footer-left">发布时间：2017-7-31 10:2</div>
+								</div>
+							</li>
+							<li class="shadow clear-both">
+								<div class="news-list-img bg" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1501120653_748.jpg&quot;);"></div>
+								<div class="news-list-body">
+									<a href="newsdetail?id=24" class="production-list-name" targer="_blank">参加司法拍卖竟买到报废车后续：车与款各自退还</a>
+									<p class="newslist-parameter"><span style="font-size:16px;"><br>　　去年11月，南宁市民卢先生参加防城港市防城区人民法院的一起司法拍卖，不料拍到手的却是一辆已经被强制报废的车辆，导致无法过户上牌。此事经本报报道后，引起强烈反响。7月19日，防城区人民法院反馈记者，此事已和当事人卢先生协商解决，双方达成一致意见，卢先生将车子和钥匙返还，法院退回卢先</span></p>
+									<div class="newslist-footer-left">发布时间：2017-7-27 9:57</div>
+								</div>
+							</li>
+							<li class="shadow clear-both">
+								<div class="news-list-img bg" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1499674684_431.jpg&quot;);"></div>
+								<div class="news-list-body">
+									<a href="newsdetail?id=23" class="production-list-name" targer="_blank">公 开 声 明</a>
+									<p class="newslist-parameter">
+										<p style="text-align:justify;"><span style="font-family:仿宋;font-size:14pt;"><span style="font-family:仿宋;"></span></span>
+										</p>
+									</p>
+									<div class="newslist-footer-left">发布时间：2017-7-10 16:18</div>
+								</div>
+							</li>
+							<li class="shadow clear-both">
+								<div class="news-list-img bg" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1498630728_908.jpg&quot;);"></div>
+								<div class="news-list-body">
+									<a href="newsdetail?id=22" class="production-list-name" targer="_blank">网络受邀参加全国首家互联网法院司法调研会</a>
+									<p class="newslist-parameter">
+										<p><span style="font-size:16px;"><br></span></p>
+										<p><span style="font-size:16px;">2017年6月26日，杭州市委副书记、政法委书记马晓前往杭州铁路运输法院实地调研。网络受杭州铁路法院邀请就</span></p>
+									</p>
+									<div class="newslist-footer-left">发布时间：2017-6-28 14:18</div>
+								</div>
+							</li>
+							<li class="shadow clear-both">
+								<div class="news-list-img bg" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1498551093_668.jpg&quot;);"></div>
+								<div class="news-list-body">
+									<a href="newsdetail?id=20" class="production-list-name" targer="_blank">北京司法拍卖现天价别墅 成交价超1.8亿元</a>
+									<p class="newslist-parameter"><span style="font-size:16px;">　　<br>　　2017年06月21日，一套位于北京颐和原著别墅小区的住房在淘宝网司法拍卖平台成交，成交价格达1.805亿元。拍卖平台信息显示，该处别墅评估价超2.2亿元，今年4月曾经历过一次拍卖，不过最终流拍。本次拍卖经过两轮竞价最终成交。<br>　　</span></p>
+									<div class="newslist-footer-left">发布时间：2017-6-27 16:11</div>
+								</div>
+							</li>
+							<li class="shadow clear-both">
+								<div class="news-list-img bg" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1497920771_506.jpg&quot;);"></div>
+								<div class="news-list-body">
+									<a href="newsdetail?id=19" class="production-list-name" targer="_blank">司法拍卖42套房产群众想“捡漏” 结果你想不到</a>
+									<p class="newslist-parameter"><span style="font-size:16px;">　　<br>　　在很多人眼里,抄底法院拍卖房是“捡漏”,但在房地产市场中,司拍房或许已经不是“价廉物美”的代名词。<br>　　<br>　　昨日,同一个小区里足足有42套新房子被司法拍卖,这也是宁波主城区(海曙、江北、鄞州)历史上(同一小区)最多的一次房子拍卖,</span></p>
+									<div class="newslist-footer-left">发布时间：2017-6-20 9:6</div>
+								</div>
+							</li>
+							<li class="shadow clear-both">
+								<div class="news-list-img bg" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1496909032_536.jpg&quot;);"></div>
+								<div class="news-list-body">
+									<a href="newsdetail?id=18" class="production-list-name" targer="_blank">淘宝司法拍卖超8亿元接盘 烂尾养老公寓或迎转机</a>
+									<p class="newslist-parameter"><span style="font-size:16px;">　　<br>　　近日，在淘宝司法拍卖平台上，一桩成交价高达8.05亿元的交易引起了各方关注。这一巨额标的物，是曾经红极一时、号称“浙江省内规模最大”的民营资本投资的医养结合养老公寓——位于萧山蜀山街道的盛和居·紫荆园。该养老公寓在2011年推出，因创新的养老模式而走俏，但在2015年交房之际</span></p>
+									<div class="newslist-footer-left">发布时间：2017-6-8 16:3</div>
+								</div>
+							</li>
+							<li class="shadow clear-both">
+								<div class="news-list-img bg" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1496713872_523.jpg&quot;);"></div>
+								<div class="news-list-body">
+									<a href="newsdetail?id=17" class="production-list-name" targer="_blank">司法网拍未及时支付拍卖款 95万元保证金“打水漂”</a>
+									<p class="newslist-parameter"><span style="font-size:16px;"><br>　　参加司法网拍，经过103次叫价，成功拍得后竟然悔拍，不再支付拍卖款。日前，苍南县人民法院作出裁定：买受人金某报名竞买时所缴纳的95万元保证金不予退还，并将其列入再次拍卖该房屋的竞买“黑名单”。<br>　　<br>　　此次司法网拍涉及的标的物，是位于</span></p>
+									<div class="newslist-footer-left">发布时间：2017-6-6 9:51</div>
+								</div>
+							</li>
+							<li class="shadow clear-both">
+								<div class="news-list-img bg" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1495762738_872.jpg&quot;);"></div>
+								<div class="news-list-body">
+									<a href="newsdetail?id=16" class="production-list-name" targer="_blank">在网上通过司法拍卖买房 你真的会买吗?</a>
+									<p class="newslist-parameter"><span style="font-size:16px;">　　<br>　　5月11日上午10时20分，在淘宝网益阳市赫山区人民法院司法拍卖网络平台上，一套商品房被成功拍出。这是益阳地区法院系统成交的网络司法拍卖第一单。最近两个月，益阳、邵阳、郴州等多地基层法院敲响网络司法拍卖“第一槌”。自今年1月1日，最高人民法院《关于人民法院网络司法拍卖若干问题</span></p>
+									<div class="newslist-footer-left">发布时间：2017-5-26 9:38</div>
+								</div>
+							</li>
+							<li class="shadow clear-both">
+								<div class="news-list-img bg" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1493778746_938.jpg&quot;);"></div>
+								<div class="news-list-body">
+									<a href="newsdetail?id=15" class="production-list-name" targer="_blank">合肥司法拍卖房源不限购 业内人士提醒想买要多做功课</a>
+									<p class="newslist-parameter"><span style="font-size:16px;"><br>　　日前，北京再度升级限购政策，将司法拍卖房源也纳入限购范围。新安晚报、安徽网记者昨天了解到，合肥暂时还按“老规矩”办，即司法拍卖房源不限购。不过，业内人士也提醒说，这些拍卖房源与一般房源差别较大，市民想购买一定要多做功课。<br>　　<br>　　&amp;l</span></p>
+									<div class="newslist-footer-left">发布时间：2017-5-3 10:32</div>
+								</div>
+							</li>
+							<li class="shadow clear-both">
+								<div class="news-list-img bg" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1493705732_310.jpg&quot;);"></div>
+								<div class="news-list-body">
+									<a href="newsdetail?id=14" class="production-list-name" targer="_blank">重庆高院出台文件推进网络司法拍卖</a>
+									<p class="newslist-parameter"><span style="font-size:16px;"><br>　　央广网重庆4月28日消息（记者陈鹏）4月27日，重庆市高级人民法院公布了《执行中司法拍卖若干问题规定（试行）》和《拍卖辅助工作机构管理办法（试行）》。重庆法院网络司法拍卖工作进入规范化、制度化的新阶段。<br>　　<br>　　推进网络司法拍卖是最高</span></p>
+									<div class="newslist-footer-left">发布时间：2017-5-2 14:12</div>
+								</div>
+							</li>
+						</ul>
+						<div class="block m-t-15">
+							<div class="pagination clear-both"><span class="pagination-pre"><i class="material-icons">keyboard_arrow_left</i>上一页</span>
+								<ul class="pagination-ul">
+									<li class="pagination-active">1</li>
+									<li class="">2</li>
+								</ul> <span class="pagination-next">下一页<i class="material-icons">keyboard_arrow_right</i></span></div>
+						</div>
+					</div>
+					<div class="widget">
+						<div class="widget-item shadow ">
+							<div class="widget-head">微信公众号</div> <img src="img/wechatCode.jpg" alt="" class="widget-qrcode"></div>
+						<!---->
+					</div>
+				</div>
+				<footer>
+					<div class="container position-relative">
+						<div class="footer-widge">
+							<a class="back-top-btn" style=""><i class="material-icons">keyboard_arrow_up</i></a>
+						</div>
+						<div class="footer-head">
+							<a href="http://admin.laipaiya.com" target="_blank">后台入口</a>
+							<a href="">关于我们</a>
+							<a href="corporation" class="" target="_blank">联系我们</a>
+							<a href="">招聘专区</a>
+							<a href="">网站地图</a>
+							<a href="news" class="router-link-exact-active router-link-active" target="_blank">司法网拍资讯</a> <span class="float-right"><i class="material-icons color-white" style="margin-right: 15px;">phone_in_talk</i> <span class="vertical-middle" style="font-size: 1.3em;">400 - 157 - 1060</span></span>
+						</div>
+						<div class="footer-body i-tab">
+							<div class="footer-tab common-tab">
+								<a class="footer-tab-btn common-tab-btn footer-tab-btn-active">热门城市</a>
+								<a class="footer-tab-btn common-tab-btn">热门搜索</a>
+							</div>
+							<div class="footer-tab-item common-tab-item">
+								<a href=" " title="北京" target="_self">北京</a>
+								<a href=" " title="上海" target="_self">上海</a>
+								<a href=" " title="广州" target="_self">广州</a>
+								<a href=" " title="杭州" target="_self">杭州</a>
+								<a href=" " title="宁波" target="_self">宁波</a>
+								<a href=" " title="天津" target="_self">天津</a>
+								<a href=" " title="南京" target="_self">南京</a>
+								<a href=" " title="合肥" target="_self">合肥</a>
+								<a href=" " title="苏州" target="_self">苏州</a>
+								<a href=" " title="无锡" target="_self">无锡</a>
+								<a href=" " title="福州" target="_self">福州</a>
+								<a href=" " title="重庆" target="_self">重庆</a>
+								<a href=" " title="长沙" target="_self">长沙</a>
+								<a href=" " title="长春" target="_self">长春</a>
+								<a href=" " title="成都" target="_self">成都</a>
+								<a href=" " title="常州" target="_self">常州</a>
+								<a href=" " title="大连" target="_self">大连</a>
+								<a href=" " title="海口" target="_self">海口</a>
+								<a href=" " title="贵阳" target="_self">贵阳</a>
+								<a href=" " title="济南" target="_self">济南</a>
+								<a href=" " title="兰州" target="_self">兰州</a>
+								<a href=" " title="哈尔滨" target="_self">哈尔滨</a>
+								<a href=" " title="呼和浩特" target="_self">呼和浩特</a>
+								<a href=" " title="昆明" target="_self">昆明</a>
+								<a href=" " title="拉萨" target="_self">拉萨</a>
+								<a href=" " title="嘉兴" target="_self">嘉兴</a>
+								<a href=" " title="南昌" target="_self">南昌</a>
+								<a href=" " title="南宁" target="_self">南宁</a>
+								<a href=" " title="石家庄" target="_self">石家庄</a>
+								<a href=" " title="沈阳" target="_self">沈阳</a>
+								<a href=" " title="太原" target="_self">太原</a>
+								<a href=" " title="绍兴" target="_self">绍兴</a>
+								<a href=" " title="武汉" target="_self">武汉</a>
+								<a href=" " title="西安" target="_self">西安</a>
+								<a href=" " title="西宁" target="_self">西宁</a>
+								<a href=" " title="乌鲁木齐" target="_self">乌鲁木齐</a>
+								<a href=" " title="郑州" target="_self">郑州</a>
+							</div>
+							<!---->
+						</div>
+						<div class="footer-footer">
+							<a href="http://www.chinacourt.org/index.shtml" target="_blank" rel="nofollow">中国法院网</a>
+							<a href="http://www.zjcourt.cn/" target="_blank" rel="nofollow">浙江法院新闻网</a>
+							<a href="http://shfy.chinacourt.org/index.shtml" target="_blank" rel="nofollow">上海法院网</a>
+							<a href="http://www.jsfy.gov.cn/" target="_blank" rel="nofollow">江苏法院网</a>
+							<a href="http://bjgy.chinacourt.org/index.shtml" target="_blank" rel="nofollow">北京法院网</a>
+							<a href="http://www.gdcourts.gov.cn/gdgy/s" target="_blank" rel="nofollow">广东法院网</a>
+							<a href="http://www.tmsf.com/" target="_blank" rel="nofollow">透明售房网</a>
+							<a href="http://www.zjpse.com/" target="_blank" rel="nofollow">浙江产权交易所</a>
+							<a href="http://www.cbex.com.cn/" target="_blank" rel="nofollow">北京产权交易所</a>
+						</div>
+						<div class="copyright">
+							<p>© Copyright 2016  laipaiya.com 版权所有 杭州网络科技有限公司 | 浙ICP备15004499号-1 |
+								<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602002655">浙公网安备 33010602002655号</a>
+							</p>
+						</div>
+					</div>
+				</footer>
+			</div>
+			<!---->
+			<!---->
+			<!---->
+		</div>
+		
+	</body>
+
+</html>

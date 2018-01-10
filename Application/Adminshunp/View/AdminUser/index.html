@@ -1,0 +1,127 @@
+<include file="Common/header" />
+<div id="right-content">
+    <div class="top">
+        <h2>用户管理 <small>后台管理员列表</small></h2>
+    </div>
+
+    <ul class="nav nav-tabs mt10">
+        <!-- <li role="presentation" class="active">
+            <a href="{:U('Category/index')}">分类列表</a>
+        </li> -->
+        <li role="presentation">
+            <a href="#" data-toggle="modal" data-target="#addBox">添加管理员</a>
+        </li>
+    </ul>
+
+    <form action="" method="post">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th width="120">#</th>
+                    <th>管理员名</th>
+                    <th>管理员状态</th>
+                    <th>预留电话</th>
+                    <th width="200">操作</th>
+                </tr>
+                </thead>
+
+                <foreach name="_list" item="v" key="k">
+                    <tr>
+                        <td>{$k+1}</td>
+                        <td>{$v.username}</td>
+                        <td>
+                            <eq name="v.status" value="0">
+                            <span style="color: red;">禁用</span>
+                            <else />
+                            <span>启用</span>
+                        </eq>
+                        </td>
+                        <td>
+                            <eq name="v.phone" value="">
+                                暂无联系方式
+                                <else />
+                                {$v.phone}
+                            </eq>
+                        </td>
+                        <td class="handle">
+                            <if condition="$v.id eq 1">
+                                超级权限，不可操作
+                                <else/>
+                                <a href="{:U('AdminUser/edit',array('id'=>$v['id']))}" class="edit"><i class="glyphicon glyphicon-pencil"></i>修改</a>
+                                <a href="javascript:;" class="del" onclick="if(confirm('确定删除吗？')) location.href='{:U('AdminUser/del', array('id'=>$v['id']))}'">
+                                    <i class="glyphicon glyphicon-trash"></i>删除
+                                </a>
+                            </if>
+                        </td>
+                    </tr>
+                </foreach>
+                <tr>
+                    <td colspan="10" align="right">{$page}</td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+
+<!-- 添加框 begin -->
+<div class="modal fade" id="addBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="glyphicon glyphicon-pencil mr5"></i>添加管理员
+                </h4>
+            </div>
+            <form action="{:U('AdminUser/add_adminuser')}" method="post" class="form-horizontal">
+                <div class="modal-body clearfix">
+                    <div class="form-group clearfix mt10">
+                        <label class="col-sm-2 control-label">管理员名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="username" value="">
+                        </div>
+                    </div>
+                    <div class="form-group clearfix mt10">
+                        <label class="col-sm-2 control-label">联系方式</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="phone" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group clearfix mt10">
+                        <label class="col-sm-2 control-label">管理员密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="password" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group clearfix mt10">
+                        <label class="col-sm-2 control-label">确认密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="repassword" value="">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group clearfix mt10">
+                        <label class="col-sm-2 control-label">是否启用</label>
+                        <div class="col-sm-10">
+                            <input type="radio" checked="checked" name="status" value="0">否
+                            <input type="radio"  name="status" value="1">是
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary w100">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 添加框 end -->
+
+<include file="Common/footer" />
+

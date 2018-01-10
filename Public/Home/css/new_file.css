@@ -1,0 +1,447 @@
+.sf-focus-2014 .right-wrap .pai-help dt .more-link span,
+.sf-focus-2014 .select-list .item-more i {
+	font-family: SimSun, tahoma, arial, sans-serif
+}
+
+.sf-focus-2014 {
+	margin-top: 18px;
+	display: block
+}
+
+.sf-focus-2014 .layout-wrap {
+	*zoom: 1;
+	margin: 0 auto;
+	width: 1190px
+}
+
+.sf-focus-2014 .layout-wrap:after,
+.sf-focus-2014 .layout-wrap:before {
+	content: " ";
+	display: table
+}
+
+.sf-focus-2014 .layout-wrap:after {
+	clear: both
+}
+
+.sf-focus-2014 .layout-left {
+	float: left
+}
+
+.sf-focus-2014 .layout-right {
+	float: right
+}
+
+.sf-focus-2014 .layout-bd {
+	border-right: 3px solid #eee;
+	margin-right: 8px;
+	_margin-right: 3px;
+	_display: inline
+}
+
+.sf-focus-2014 .layout-bd-right {
+	_width: 929px
+}
+
+.sf-focus-2014 .select-list {
+	background-color: #fff;
+	border: 2px solid #ce2023;
+	overflow: hidden;
+	width: 246px;
+	height: 366px
+}
+
+.sf-focus-2014 .select-list .list-box {
+	display: block;
+	margin: 0px 18px;
+	position: relative;
+	padding: 12px 0
+}
+
+.sf-focus-2014 .select-list .list-box h3 {
+	color: #333;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 20px;
+	height: 20px;
+	position: relative
+}
+
+.sf-focus-2014 .select-list .list-box h3 a {
+	display: block;
+	text-decoration: none;
+	color: #333
+}
+
+.sf-focus-2014 .select-list .list-box h3 a:hover {
+	color: #d91615
+}
+
+.sf-focus-2014 .select-list .list-box h3 span {
+	color: #d91615;
+	margin-right: 9px;
+	font-size: 21px;
+	-webkit-text-stroke-width: 0
+}
+
+.sf-focus-2014 .select-list .list-box h3 em {
+	color: #999;
+	font-weight: 400;
+	font-size: 12px
+}
+
+.sf-focus-2014 .select-list .list-box ul {
+	*zoom: 1;
+	position: relative;
+	width: 220px
+}
+
+.sf-focus-2014 .select-list .list-box ul:after,
+.sf-focus-2014 .select-list .list-box ul:before {
+	content: " ";
+	display: table
+}
+
+.sf-focus-2014 .select-list .list-box ul:after {
+	clear: both
+}
+
+.sf-focus-2014 .select-list .list-box li {
+	margin: 11px 0 0;
+	float: left;
+	width: 53px;
+	*display: inline
+}
+
+.sf-focus-2014 .select-list .list-box li a {
+	color: #333;
+	padding: 0 2px;
+	font-size: 12px
+}
+
+.sf-focus-2014 .select-list .list-box li a:hover {
+	background: #d91615;
+	color: #fff;
+	text-decoration: none
+}
+
+.sf-focus-2014 .select-list .location-list {
+	margin: 0 19px;
+	padding: 0
+}
+
+.sf-focus-2014 .select-list .item-more {
+	position: absolute;
+	border: 1px solid #e8e8e8;
+	width: 38px;
+	height: 18px;
+	line-height: 18px;
+	top: 50%;
+	right: 8px;
+	margin-top: -9px;
+	text-decoration: none;
+	font-size: 12px;
+	text-align: center;
+	font-weight: 400
+}
+
+.sf-focus-2014 .select-list .item-more:hover {
+	color: #dc2625;
+	font-size: 12px
+}
+
+.sf-focus-2014 .select-list .item-more i {
+	font-style: normal
+}
+
+.sf-focus-2014 .main-slide {
+	border: 1px solid #dfdfdf;
+	overflow: hidden;
+	position: relative;
+	width: 658px;
+	height: 368px;
+	/*background: url(//img.alicdn.com/tps/i2/TB1UXltGXXXXXXhXpXXpJArGXXX-34-34.gif) center center no-repeat #f6f6f6*/
+}
+
+.sf-focus-2014 .main-slide .next,
+.sf-focus-2014 .main-slide .prev {
+	position: absolute;
+	top: 50%;
+	left: 6px;
+	width: 40px;
+	height: 40px;
+	margin-top: -20px;
+	background-color: #666;
+	background-color: rgba(0, 0, 0, .3);
+	display: none;
+	z-index: 9
+}
+
+.sf-focus-2014 .main-slide .next:hover,
+.sf-focus-2014 .main-slide .prev:hover {
+	background-color: rgba(0, 0, 0, .6)
+}
+
+.sf-focus-2014 .main-slide .next i,
+.sf-focus-2014 .main-slide .prev i {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -7px;
+	margin-top: -12px;
+	width: 15px;
+	height: 23px;
+	display: block;
+	
+}
+
+.sf-focus-2014 .main-slide .next {
+	left: auto;
+	right: 6px
+}
+
+.sf-focus-2014 .main-slide .next i {
+	background-position: 0 0
+}
+
+.sf-focus-2014 .main-slide .content .panel {
+	width: 658px;
+	height: 368px;
+	line-height: 368px;
+	text-align: center
+}
+
+.sf-focus-2014 .main-slide .content .panel a,
+.sf-focus-2014 .main-slide .content .panel a img {
+	display: block;
+	width: 658px
+}
+
+.sf-focus-2014 .main-slide .tab-nav {
+	background-color: #c3c3c3;
+	background-color: rgba(255, 255, 255, .6);
+	border-radius: 10px;
+	height: 16px;
+	line-height: 16px;
+	position: absolute;
+	left: 50%;
+	bottom: 16px;
+	text-align: center;
+	z-index: 10;
+	padding: 0 2px 1px
+}
+
+.sf-focus-2014 .main-slide .tab-nav li {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	padding: 4px;
+	width: 8px;
+	height: 8px;
+	line-height: 8px
+}
+
+.sf-focus-2014 .main-slide .tab-nav li a {
+	display: block;
+	background-color: #dedede;
+	border-radius: 10px;
+	width: 9px;
+	height: 9px;
+	text-indent: -999em
+}
+
+.sf-focus-2014 .main-slide .tab-nav li .current {
+	background-color: #ce2023
+}
+
+.sf-focus-2014 .right-wrap {
+	width: 268px;
+	background: #f7f7f7;
+	border: 1px solid #dfdfdf;
+	border-left: none;
+	height: 368px;
+	overflow: hidden
+}
+
+.sf-focus-2014 .right-wrap .pai-adv {
+	width: 100%;
+	height: 124px;
+	border-bottom: 1px solid #DFDFDF
+}
+
+.sf-focus-2014 .right-wrap .pai-adv li {
+	float: left;
+	width: 99%;
+	background-color: #E96B3A;
+	position: relative;
+	height: 100%;
+	/*margin: 0px 0;*/
+	_display: inline;
+	border: 1px solid red;
+}
+
+.sf-focus-2014 .right-wrap .pai-adv li a {
+	display: block;
+	width: 100%;
+	height: 100%
+}
+
+.sf-focus-2014 .right-wrap .pai-adv li a:hover {
+	text-decoration: none
+}
+
+.sf-focus-2014 .right-wrap .pai-adv div {
+	position: absolute;
+	width: 100%;
+	text-align: center
+}
+
+.sf-focus-2014 .right-wrap .pai-adv .pai-quan {
+	color: #bcbcbc;
+	top: 0;
+	left: 50%;
+	margin-left: -24px;
+	width: 47px;
+	height: 47px;
+	line-height: 47px;
+	font-size: 47px
+}
+
+.sf-focus-2014 .right-wrap .pai-adv .pai-yuan {
+	color: #fff;
+	top: 1px;
+	left: 50%;
+	margin-left: -27px;
+	width: 47px;
+	height: 47px;
+	line-height: 47px;
+	font-size: 54px
+}
+
+.sf-focus-2014 .right-wrap .pai-adv .pai-icon {
+	color: #cd0000;
+	top: 12px;
+	left: 50%;
+	margin-left: -15px;
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	font-size: 30px
+}
+
+.sf-focus-2014 .right-wrap .pai-adv .pai-text {
+	color: white;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 85px;
+	font-size: 30px;
+	font-weight: 700
+}
+
+.sf-focus-2014 .right-wrap .pai-adv a:hover .pai-quan,
+.sf-focus-2014 .right-wrap .pai-adv a:hover .pai-text {
+	color: #cd0000
+}
+
+.sf-focus-2014 .right-wrap .pai-help {
+	padding: 22px 0 0 21px;
+	overflow: hidden
+}
+
+.sf-focus-2014 .right-wrap .pai-help dt {
+	font-size: 20px;
+	margin-bottom: 12px;
+	padding-right: 16px;
+	color: #303030
+}
+
+.sf-focus-2014 .right-wrap .pai-help dt .more-link {
+	float: right;
+	font-size: 12px;
+	margin-top: 4px
+}
+
+.sf-focus-2014 .right-wrap .pai-help dt a {
+	color: #333;
+	text-decoration: none;
+	display: block
+}
+
+
+
+.sf-focus-2014 .right-wrap .pai-help dt a:hover {
+	color: #cd0000
+}
+
+.sf-focus-2014 .right-wrap .pai-help dd {
+	overflow: hidden;
+	white-space: nowrap;
+	float: left;
+	display: inline;
+	width: 100%;
+	margin: 0 0 15px
+}
+
+.sf-focus-2014 .right-wrap .pai-help dd a {
+	color: #777
+}
+
+.sf-focus-2014 .right-wrap .pai-help dd a:hover {
+	color: #cd0000;
+	text-decoration: underline
+}
+
+.sf-focus-2014 .right-wrap .pai-help dd a:hover span {
+	text-decoration: underline
+}
+
+.sf-focus-2014 .right-wrap .pai-help dd a:hover .tag-flag {
+	color: #fff;
+	background: #cd0000;
+	border-color: #cd0000
+}
+
+.sf-focus-2014 .right-wrap .pai-help dd a.hot-flag .tag-flag {
+	border-color: #cd0000
+}
+
+.sf-focus-2014 .right-wrap .pai-help dd a.hot-flag:hover {
+	color: #cd0000!important;
+	background: #f7f7f7!important
+}
+
+.sf-focus-2014 .right-wrap .pai-help dd a span {
+	display: inline-block;
+	height: 20px;
+	line-height: 25px
+}
+
+.sf-focus-2014 .right-wrap .pai-help dd a .tag-flag {
+	display: inline-block;
+	border: 1px solid #666;
+	text-align: center;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	text-indent: 0;
+	padding: 0 6px;
+	margin-right: 4px;
+	height: 18px;
+	line-height: 18px
+}
+
+.sf-focus-2014 .right-wrap .hot-line {
+	font-size: 14px;
+	color: #666;
+	padding: 0px 0 0 21px
+}
+
+.hot-flag {
+	color: #cd0000!important
+}
+
+.hot-flag:hover {
+	background: #cd0000!important;
+	color: #fff!important
+}

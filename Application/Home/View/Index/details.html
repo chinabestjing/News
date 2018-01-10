@@ -1,0 +1,1198 @@
+<html>
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/text.css">
+		<style type="text/css">
+			.amap-indoor-map .label-canvas {
+				position: absolute;
+				top: 0;
+				left: 0
+			}
+			
+			.amap-indoor-map .highlight-image-con * {
+				pointer-events: none
+			}
+			
+			.amap-indoormap-floorbar-control {
+				position: absolute;
+				margin: auto 0;
+				bottom: 165px;
+				right: 12px;
+				width: 35px;
+				text-align: center;
+				line-height: 1.3em;
+				overflow: hidden;
+				padding: 0 2px
+			}
+			
+			.amap-indoormap-floorbar-control .panel-box {
+				background-color: rgba(255, 255, 255, .9);
+				border-radius: 3px;
+				border: 1px solid #ccc
+			}
+			
+			.amap-indoormap-floorbar-control .select-dock {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				box-sizing: border-box;
+				height: 30px;
+				border: solid #4196ff;
+				border-width: 0 2px;
+				border-radius: 2px;
+				pointer-events: none;
+				background: linear-gradient(to bottom, #f6f8f9 0, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%)
+			}
+			
+			.amap-indoor-map .transition {
+				transition: opacity .2s
+			}
+			
+			,
+			.amap-indoormap-floorbar-control .transition {
+				transition: top .2s, margin-top .2s
+			}
+			
+			.amap-indoormap-floorbar-control .select-dock:after,
+			.amap-indoormap-floorbar-control .select-dock:before {
+				content: "";
+				position: absolute;
+				width: 0;
+				height: 0;
+				left: 0;
+				top: 10px;
+				border: solid transparent;
+				border-width: 4px;
+				border-left-color: #4196ff
+			}
+			
+			.amap-indoormap-floorbar-control .select-dock:after {
+				right: 0;
+				left: auto;
+				border-left-color: transparent;
+				border-right-color: #4196ff
+			}
+			
+			.amap-indoormap-floorbar-control.is-mobile {
+				width: 37px
+			}
+			
+			.amap-indoormap-floorbar-control.is-mobile .floor-btn {
+				height: 35px;
+				line-height: 35px
+			}
+			
+			.amap-indoormap-floorbar-control.is-mobile .select-dock {
+				height: 35px;
+				top: 36px
+			}
+			
+			.amap-indoormap-floorbar-control.is-mobile .select-dock:after,
+			.amap-indoormap-floorbar-control.is-mobile .select-dock:before {
+				top: 13px
+			}
+			
+			.amap-indoormap-floorbar-control.is-mobile .floor-list-box {
+				height: 105px
+			}
+			
+			.amap-indoormap-floorbar-control .floor-list-item .floor-btn {
+				color: #555;
+				font-family: "Times New Roman", sans-serif, "Microsoft Yahei";
+				font-size: 16px
+			}
+			
+			.amap-indoormap-floorbar-control .floor-list-item.selected .floor-btn {
+				color: #000
+			}
+			
+			.amap-indoormap-floorbar-control .floor-btn {
+				height: 28px;
+				line-height: 28px;
+				overflow: hidden;
+				cursor: pointer;
+				position: relative;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none
+			}
+			
+			.amap-indoormap-floorbar-control .floor-btn:hover {
+				background-color: rgba(221, 221, 221, .4)
+			}
+			
+			.amap-indoormap-floorbar-control .floor-minus,
+			.amap-indoormap-floorbar-control .floor-plus {
+				position: relative;
+				text-indent: -1000em
+			}
+			
+			.amap-indoormap-floorbar-control .floor-minus:after,
+			.amap-indoormap-floorbar-control .floor-plus:after {
+				content: "";
+				position: absolute;
+				margin: auto;
+				top: 9px;
+				left: 0;
+				right: 0;
+				width: 0;
+				height: 0;
+				border: solid transparent;
+				border-width: 10px 8px;
+				border-top-color: #777
+			}
+			
+			.amap-indoormap-floorbar-control .floor-minus.disabled,
+			.amap-indoormap-floorbar-control .floor-plus.disabled {
+				opacity: .3
+			}
+			
+			.amap-indoormap-floorbar-control .floor-plus:after {
+				border-bottom-color: #777;
+				border-top-color: transparent;
+				top: -3px
+			}
+			
+			.amap-indoormap-floorbar-control .floor-list-box {
+				max-height: 153px;
+				position: relative;
+				overflow-y: hidden
+			}
+			
+			.amap-indoormap-floorbar-control .floor-list {
+				margin: 0;
+				padding: 0;
+				list-style: none
+			}
+			
+			.amap-indoormap-floorbar-control .floor-list-item {
+				position: relative
+			}
+			
+			.amap-indoormap-floorbar-control .floor-btn.disabled,
+			.amap-indoormap-floorbar-control .floor-btn.disabled *,
+			.amap-indoormap-floorbar-control.with-indrm-loader * {
+				-webkit-pointer-events: none!important;
+				pointer-events: none!important
+			}
+			
+			.amap-indoormap-floorbar-control .with-indrm-loader .floor-nonas {
+				opacity: .5
+			}
+			
+			.amap-indoor-map-moverf-marker {
+				color: #555;
+				background-color: #FFFEEF;
+				border: 1px solid #7E7E7E;
+				padding: 3px 6px;
+				font-size: 12px;
+				white-space: nowrap;
+				display: inline-block;
+				position: absolute;
+				top: 1em;
+				left: 1.2em
+			}
+			
+			.amap-indoormap-floorbar-control .amap-indrm-loader {
+				-moz-animation: amap-indrm-loader 1.25s infinite linear;
+				-webkit-animation: amap-indrm-loader 1.25s infinite linear;
+				animation: amap-indrm-loader 1.25s infinite linear;
+				border: 2px solid #91A3D8;
+				border-right-color: transparent;
+				box-sizing: border-box;
+				display: inline-block;
+				overflow: hidden;
+				text-indent: -9999px;
+				width: 13px;
+				height: 13px;
+				border-radius: 7px;
+				position: absolute;
+				margin: auto;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0
+			}
+			
+			@-moz-keyframes amap-indrm-loader {
+				0% {
+					-moz-transform: rotate(0);
+					transform: rotate(0)
+				}
+				100% {
+					-moz-transform: rotate(360deg);
+					transform: rotate(360deg)
+				}
+			}
+			
+			@-webkit-keyframes amap-indrm-loader {
+				0% {
+					-webkit-transform: rotate(0);
+					transform: rotate(0)
+				}
+				100% {
+					-webkit-transform: rotate(360deg);
+					transform: rotate(360deg)
+				}
+			}
+			
+			@keyframes amap-indrm-loader {
+				0% {
+					-moz-transform: rotate(0);
+					-ms-transform: rotate(0);
+					-webkit-transform: rotate(0);
+					transform: rotate(0)
+				}
+				100% {
+					-moz-transform: rotate(360deg);
+					-ms-transform: rotate(360deg);
+					-webkit-transform: rotate(360deg);
+					transform: rotate(360deg)
+				}
+			}
+		</style>
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>司法拍卖辅助平台</title>
+		<link rel="shortcut icon" href="img/logo.ico" type="img/x-icon">
+		<script src="https://hm.baidu.com/hm.js?25267f815d19ca3f16af3eea13a101b8"></script>
+		<script async="" charset="utf-8" src="js/udeskApi.js"></script>
+		<script src="js/redirect.js"></script>
+		<script src="js/polyfill.min.js"></script>
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/common.js"></script>
+		<style type="text/css">
+			.alert-wrap {
+				height: 662px
+			}
+		</style>
+		<link href="css/one.css" rel="stylesheet">
+		<style type="text/css">
+			.el-vue-amap-container,
+			.el-vue-amap-container .el-vue-amap {
+				height: 100%
+			}
+		</style>
+		<style type="text/css">
+			.el-vue-search-box-container {
+				position: relative;
+				width: 360px;
+				height: 45px;
+				background: #fff;
+				box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+				border-radius: 2px 3px 3px 2px;
+				z-index: 10
+			}
+			
+			.el-vue-search-box-container .search-box-wrapper {
+				position: absolute;
+				display: flex;
+				align-items: center;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				box-sizing: border-box
+			}
+			
+			.el-vue-search-box-container .search-box-wrapper input {
+				flex: 1;
+				height: 20px;
+				line-height: 20px;
+				letter-spacing: .5px;
+				font-size: 14px;
+				text-indent: 10px;
+				box-sizing: border-box;
+				border: none;
+				outline: none
+			}
+			
+			.el-vue-search-box-container .search-box-wrapper .search-btn {
+				width: 45px;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: transparent;
+				cursor: pointer
+			}
+			
+			.el-vue-search-box-container .search-tips {
+				position: absolute;
+				top: 100%;
+				border: 1px solid #dbdbdb;
+				background: #fff;
+				overflow: auto
+			}
+			
+			.el-vue-search-box-container .search-tips ul {
+				padding: 0;
+				margin: 0
+			}
+			
+			.el-vue-search-box-container .search-tips ul li {
+				height: 40px;
+				line-height: 40px;
+				box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+				padding: 0 10px;
+				cursor: pointer
+			}
+			
+			.el-vue-search-box-container .search-tips ul li.autocomplete-selected {
+				background: #eee
+			}
+		</style>
+		<script type="text/javascript" async=""></script>
+		<meta name="keywords" content="司法拍卖辅助平台" data-vue-meta="true">
+		<meta name="description" content="司法拍卖辅助平台" data-vue-meta="true">
+		<script src="http://laipaiya.udesk.cn/agents/free?callback=udesk_jsonp1"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<div>
+				<div>
+					<div class="nav index-nav">
+						<div class="container clear-both">
+							<div class="nav-left">
+								<a href="" class="logo-main inline-block m-r-10 router-link-active"><img src="img/logo-main.png"></a>
+								<div class="nav-list inline-block">
+									<a href="index.html" class="nav-list-item router-link-active">首页</a>
+									<a href="court.html" class="nav-list-item">法院</a>
+									<a href="list.html" class="nav-list-item">货品·预约</a>
+									<a href="sign.html" tag="a" target="_blank" class="nav-list-item">法院监管</a>
+									<a href="corporation.html" class="nav-list-item">招聘英才</a>
+									<a href="cooperation.html" class="nav-list-item">联系我们</a>
+								</div>
+							</div>
+							<div class="nav-right  clear-both">
+								<!--<div class="nav-login inline-block  cursor-pointer"><i class="material-icons float-blcok"></i>
+									
+									<a href="login.html" class="float-blcok vertical-middle login">登录</a>
+									<a> | </a>
+									
+									<a href="login.html" class="vertical-middle sign">注册</a>
+								</div>-->
+								<div class="nav-search"><input type="text" placeholder="搜索标的物"> <i class="material-icons nav-search-icon cursor-pointer">O</i></div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				<div class="grey-container p-b-15 p-t-15">
+					<div class="head-map container">
+						您现在的位置：
+						<a href="/">首页</a> &gt;
+						<a href="list?requireType=house_detail" class="" target="_blank">房产</a> &gt;
+						<a>位于川姜镇南通家纺城家纺大酒店幢406室不动产及附属设施（按现状拍卖交接）</a>
+					</div>
+					<div class="container production-detail-top clear-both">
+						<!--<div class="production-detail-slider">
+							
+							<div class="bigImg" style="width: 2520px;">
+								<div class="dontcopy"></div> 
+								<img imgpath="" class="slider-item" src="img/p.jpg" style="width: 504px;">
+								<img imgpath="" class="slider-item" src="img/11.jpg" style="width: 504px;">
+								<img imgpath="" class="slider-item" src="img/22.jpg" style="width: 504px;">
+								<img imgpath="" class="slider-item" src="img/33.jpg" style="width: 504px;">
+							</div>
+							<div class="slide-left-arrow slide_arrow">
+								<i class="material-icons size3em">＜</i>
+							</div>
+							<div class="slide-right-arrow slide_arrow">
+								<i class="material-icons size3em">＞</i>
+							</div>
+							<div class="slider-indicator">
+								<span class="slider-indicator-block" style="width: 60.48px;"></span>
+							</div>
+							<div class="smallImg clear-both" style="width: 630px;">
+								<div class="dontcopy"></div> 
+								<img imgpath="" class="smallImg-active" src="img/p.jpg">
+								<img imgpath="" class="" src="img/11.jpg">
+								<img imgpath="" class="" src="img/22.jpg">
+								<img imgpath="" class="" src="img/33.jpg">
+							</div>
+						</div>-->
+						
+						
+						
+						<div class="up" id="up">
+							<img src="img/11.jpg">
+						</div>
+						<div class="down" id="down">
+							<table style="display: block;">
+								<tr>
+									<td><img src="img/22.jpg" /></td>
+									<td><img src="img/33.jpg" /></td>
+									<td><img src="img/44.jpg" /></td>
+									<td><img src="img/55.jpg" /></td>
+									<td><img src="img/11.jpg" /></td>
+								</tr>
+							</table>
+						</div>
+						<script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+						<script type="text/javascript">
+							$(document).ready(function() {
+								$('#up img').attr('src', $('#down img').eq(0).attr('src')); //打开即把第一张图地址给#up img
+								$('#down img').eq(0).addClass("change_image"); //打开即把第一个缩略图选中
+								$('#down img').hover(function() {
+									$('#down img').removeClass("change_image"); //先清除所有选中
+									$(this).addClass("change_image"); //当前图片选中
+									$('#up img').attr('src', $(this).attr('src')); //当前图片地址给#up img
+								});
+							});
+						</script>
+						
+						<style type="text/css">
+							div.up {
+								width: 504px;
+								height: 360px;
+								background: #CCCCCC;
+								overflow: hidden;
+								/*border: 1px solid red;*/
+								/*display: block;*/
+								float: left;
+							}
+							
+							div.up img {
+								width: 100%;
+								height: 100%;
+							}
+							
+							#down img {
+								width: 100px;
+								height: 100px;
+								opacity: 0.5;
+								filter: alpha(opacity=30);
+							}
+							
+							#down img.change_image {
+								opacity: 1;
+								filter: alpha(opacity=100);
+							}
+							
+							div.down {
+								width: 350px;
+								height: 100px;
+							}
+						</style>
+						
+						
+						
+						
+						
+						
+						<div class="production-detail" style=" display: block;float: right;bottom: 100;">
+                                                                                <!--
+                                                                                	left: 500px; bottom: 465px;
+                                                                                -->
+							<p class="production-name ">位于川姜镇南通家纺城家纺大酒店幢406室不动产及附属设施（按现状拍卖交接）</p>
+							<p class="production-id"><span style="margin-right: 0px;">标的物编号：</span><span>89619</span> <span>本标的物已有 0 人预约</span></p>
+							<div class="production-price-time">
+								<p><span class="color-grey">起　拍　价：</span> <span class="color-red  production-total-price">
+                                341,500 元
+                            </span></p>
+								<p><span class="color-grey text-justify">拍 卖 时 间：</span> <span>2018-01-22</span></p>
+								<div class="production-detail-state production-detail-state-pending">可预约</div>
+							</div>
+							<div class="production-detail-text">
+								<div class="clear-both production-detail-txt-item">
+									<p class="item-2"><span class="color-grey text-justify">所　在　地：</span> <span>江苏省 南通市 通州区</span></p>
+									<p class="item-2"><span class="color-grey text-justify">拍 卖 平 台：</span>
+										<!---->
+										<!---->
+										<!---->
+										<!---->
+										<!---->
+									</p>
+								</div>
+								<div class="clear-both production-detail-txt-item">
+									<p class="item-2"><span class="color-grey text-justify">建 筑 面 积：</span> <span>46.46 m²</span></p>
+									<p class="item-2"><span class="color-grey text-justify">标的物单价：</span> <span>7350.4 元/m²</span></p>
+								</div>
+								<div class="clear-both production-detail-txt-item">
+									<div class="item-2"><span class="color-grey text-justify">户　　　型：</span>
+										<!---->
+										<!---->
+										<!---->
+									</div>
+									<div class="item-2"><span class="color-grey text-justify">标的物类型：</span> <span>房产</span></div>
+								</div>
+								<div class="clear-both production-detail-txt-item">
+									<div class="item-2"><span class="color-grey text-justify">楼　　　层：</span> <span><!----> <!----></span></div>
+									<div class="item-2"><span class="color-grey text-justify">所 属 法 院：</span> <span>江苏省南通市中级人民法院</span></div>
+								</div>
+							</div>
+							
+							
+							<div class="production-order-btn ">
+								<input type="button" id="b" value="预约看样" style="background-color: #e5301b; border: 1px solid #e5301b; color: white; font-size: 20px; cursor: hand;" onclick="open2()" />
+							</div>
+								<script type="text/javascript" src="js/zDialog.js" ></script>
+								<script type="text/javascript" src="js/zDrag.js" ></script>
+								<script type="text/javascript">
+			
+									function open2()
+									{
+										var diag = new Dialog();
+										diag.Width = 350;
+										diag.Height = 350;
+										diag.URL = "test_one.html";
+										diag.show();
+									}
+								</script>
+							
+							<a style="font-size: 20px;color: #D91615;">&nbsp;&nbsp;&nbsp;&nbsp;客服电话：123456789</a>
+							<div class="production-share">
+								<div>
+									<div class="production-share-item"><img src="img/wechatcode.jpg" alt="" class=" production-share-wechat-icon">
+										<div class="production-share-qrcode">
+											<p class="production-share-text">扫描二维码分享该标的物</p>
+											<div id="qrcode" title="http://h5.laipaiya.com/i?id=89619"><canvas width="160" height="160" style="display: none;"></canvas><img alt="Scan me!" src="img/wechatcode.jpg" style="display: block;"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="container clear-both" style="">
+						<div class="detail-content-left">
+							<div class="recommend-container">
+								<p class="recommend-title">标的物推荐</p>
+								<ul class="recommend-ul">
+									<li class="recommend-item">
+										<a href="details.html" class="router-link-active" target="_blank">
+											<div class="recommend-item-img bg" lazy="loaded" style="background-image: url(img/wechatcode.jpg);"></div>
+											<div class="recommend-item-title">江苏省泰州市海陵区东进西路68号共同50套非住宅房地产</div>
+											<div class="recommend-item-price">起拍价：1750万元</div>
+										</a>
+									</li>
+									<li class="recommend-item">
+										<a href="details.html" class="router-link-active" target="_blank">
+											<div class="recommend-item-img bg" lazy="loading" style="background-image: url(img/wechatcode.jpg);"></div>
+											<div class="recommend-item-title">镇江市第一楼街11号负1层、23号负1层</div>
+											<div class="recommend-item-price">起拍价：828.40万元</div>
+										</a>
+									</li>
+									<li class="recommend-item">
+										<a href="details.html" class="router-link-active" target="_blank">
+											<div class="recommend-item-img bg" lazy="loading" style="background-image: url(img/wechatcode.jpg);"></div>
+											<div class="recommend-item-title">泗洪县阳光世纪花城8幢2单元601室</div>
+											<div class="recommend-item-price">起拍价：28.18万元</div>
+										</a>
+									</li>
+									<li class="recommend-item">
+										<a href="details.html" class="router-link-active" target="_blank">
+											<div class="recommend-item-img bg" lazy="loading" style="background-image: url(img/wechatcode.jpg);"></div>
+											<div class="recommend-item-title">位于如东县曹埠镇上漫村17组工业用途房地产</div>
+											<div class="recommend-item-price">起拍价：1410万元</div>
+										</a>
+									</li>
+									<li class="recommend-item">
+										<a href="details.html" class="router-link-active" target="_blank">
+											<div class="recommend-item-img bg" lazy="loading" style="background-image: url(img/wechatcode.jpg);"></div>
+											<div class="recommend-item-title">如东县掘港镇晓河村九组的工业用途房地产</div>
+											<div class="recommend-item-price">起拍价：1315.40万元</div>
+										</a>
+									</li>
+									<li class="recommend-item">
+										<a href="details.html" class="router-link-active" target="_blank">
+											<div class="recommend-item-img bg" lazy="loading" style="background-image: url(img/wechatcode.jpg);"></div>
+											<div class="recommend-item-title">沭阳县健康家园26幢西二室房屋</div>
+											<div class="recommend-item-price">起拍价：138万元</div>
+										</a>
+									</li>
+									<li class="recommend-item">
+										<a href="details.html" class="router-link-active" target="_blank">
+											<div class="recommend-item-img bg" lazy="loading" style="background-image: url(img/wechatcode.jpg);"></div>
+											<div class="recommend-item-title">沭阳县扎下镇晏湾小区1-1-401室房屋及5-1-8车库</div>
+											<div class="recommend-item-price">起拍价：19万元</div>
+										</a>
+									</li>
+									<li class="recommend-item">
+										<a href="details.html" class="router-link-active" target="_blank">
+											<div class="recommend-item-img bg" lazy="loading" style="background-image: url(img/wechatcode.jpg);"></div>
+											<div class="recommend-item-title">沭阳县三匹马商业广场5号楼5B-202室房屋</div>
+											<div class="recommend-item-price">起拍价：1625万元</div>
+										</a>
+									</li>
+									<li class="recommend-item">
+										<a href="details.html" class="router-link-active" target="_blank">
+											<div class="recommend-item-img bg" lazy="loading" style="background-image: url(img/wechatcode.jpg);"></div>
+											<div class="recommend-item-title">沭阳县三匹马商业广场5号楼5A-201室房屋</div>
+											<div class="recommend-item-price">起拍价：521万元</div>
+										</a>
+									</li>
+									<li class="recommend-item">
+										<a href="details.html" class="router-link-active" target="_blank">
+											<div class="recommend-item-img bg" lazy="loading" style="background-image: url(img/wechatcode.jpg);"></div>
+											<div class="recommend-item-title">沭阳县阳光花苑3-甲-602室房屋</div>
+											<div class="recommend-item-price">起拍价：50.83万元</div>
+										</a>
+									</li>
+									<li class="recommend-item">
+										<a href="details.html" class="router-link-active" target="_blank">
+											<div class="recommend-item-img bg" lazy="loading" style="background-image: url(img/wechatcode.jpg);"></div>
+											<div class="recommend-item-title">沭阳县春风沂水小区13-2-1502室房屋</div>
+											<div class="recommend-item-price">起拍价：34万元</div>
+										</a>
+									</li>
+									<li class="recommend-item">
+										<a href="details.html" class="router-link-active" target="_blank">
+											<div class="recommend-item-img bg" lazy="loading" style="background-image: url(img/wechatcode.jpg);"></div>
+											<div class="recommend-item-title">沭阳县步行街飞华路41号房产</div>
+											<div class="recommend-item-price">起拍价：422万元</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="detail-content-right">
+							<div class="for-inside-nav"></div>
+							<div class="inside-nav">
+								<div class="inside-nav-container">
+									<a onclick="ZY();" class="inside-nav-active">重要提示</a>
+									<a onclick="PM();">拍卖详情</a>
+									<a onclick="BD();">标的物详情</a>
+									<a onclick="GG();">公告·须知</a>
+									<a onclick="SP();">视频</a>
+									<a onclick="DL();">地理位置</a>
+									<!----><span class="inside-nav-bottom"></span>
+									<p class="phone400"><i class="material-icons color-red">T</i> <span class="m-l-10 m-r-10 vertical-middle color-red">客服热线</span> <span class="vertical-middle color-red">400-157-1060</span></p>
+								</div>
+							</div>
+							<div class="inside-nav-part  clear-both" offsettop="925">
+								<p id="zy" class="text-center size1_5em p-b-15 ">重要提示</p>
+								<div class="shadow-line m-b-30"></div>
+								<div class="detail-important-warming">
+									<p>平台受
+										<a href="court?id=1123" class="color-red" target="_blank">江苏省南通市中级人民法院</a> 委托，承担本标的物情况调查、看样管理等工作，并提供标的物相关信息咨询服务。现将相关事务告知如下：</p>
+									<p>一、竞买人在参拍前，须仔细阅读法院发布的《竞买公告》、《竞买须知》和《标的物情况》。</p>
+									<p>二、本平台向您提供的一切增值信息均不代表处置法院的意见，与处置法院无关，处置法院提供的信息均以法院发布的公告为准。</p>
+									<p>三、本平台所提供的增值信息均系本平台从公开渠道收集并整理所得，本平台将尽力维护信息的准确性和及时性，但本平台仅能确保本平台未对所收集的信息作过任何的伪造或变造，而并不能保证其为完全准确和最新的信息，本平台不对信息内容作任何形式的担保。</p>
+									<p>四、竞买人在预约及看样过程中，请认准本平台及工作人员的工作证件，在看样现场服从带看样人员管理，在服务过程中遇各种情况，都可向4001-571-060建议或投诉。</p>
+								</div>
+							</div>
+							<div class="inside-nav-part clear-both" offsettop="1244">
+								<p id="pm" class="text-center size1_5em p-b-15 ">拍卖详情</p>
+								<div class="shadow-line m-b-30"></div>
+								<ul class="clear-both paimai-detail">
+									<li class="item-4">拍卖时间：2018-01-22</li>
+									<li class="item-4">竞价周期：24小时</li>
+									<li class="item-4">加价幅度：10000元</li>
+									<li class="item-4">处置法院：江苏省南通市中级人民法院</li>
+									<li class="item-4">拍卖方式：<span>线上</span>
+										<!---->
+									</li>
+									<li class="item-4">保证金：50000元</li>
+									<li class="item-4">保留价：<span>有</span>
+										<!---->
+									</li>
+									<li class="item-4">优先购买权：
+										<!----><span>无</span></li>
+								</ul>
+							</div>
+							<div class="inside-nav-part clear-both" offsettop="1444">
+								<p id="bd" class="text-center size1_5em p-b-15 ">标的物详情</p>
+								<div class="shadow-line m-b-30"></div>
+								<div class="clear-both">
+									<div class="item-2 xiangqing-box">
+										<table cellpadding="10" class="production-introduction text-center">
+											<tbody>
+												<tr>
+													<td>标的物名称</td>
+													<td>位于川姜镇南通家纺城家纺大酒店幢406室不动产及附属设施（按现状拍卖交接）</td>
+												</tr>
+												<tr>
+													<td>权证情况</td>
+													<td class="p-0">
+														<table class="inside-table float-block ">
+															<tbody>
+																<tr>
+																	<td class="border-no-top left-part-40">法院执行裁定书</td>
+																	<td class="border-no-top border-no-right text-center left-part-60">（2015）通中执字第0499号</td>
+																</tr>
+																<tr>
+																	<td>房屋产权证</td>
+																	<td class="border-no-right text-center">无</td>
+																</tr>
+																<tr>
+																	<td>土地产权证</td>
+																	<td class="border-no-right text-center">无</td>
+																</tr>
+															</tbody>
+														</table>
+													</td>
+												</tr>
+												<tr>
+													<td>标的所有人</td>
+													<td>南通家纺城大酒店发展有限公司</td>
+												</tr>
+												<tr>
+													<td>评估鉴定基准日</td>
+													<td>2017年6月7日</td>
+												</tr>
+												<tr>
+													<td>标的现状</td>
+													<td class="p-0">
+														<table class="inside-table float-block ">
+															<tbody>
+																<tr>
+																	<td class="border-no-top left-part-40">房屋用途</td>
+																	<td class="border-no-top border-no-right left-part-60"><span class="text-center display-block">商业</span></td>
+																</tr>
+																<tr>
+																	<td>土地性质</td>
+																	<td class="border-no-right">
+																		<!---->
+																	</td>
+																</tr>
+																<tr>
+																	<td>土地用途</td>
+																	<td class="border-no-right"><span class="text-center display-block">商业</span></td>
+																</tr>
+																<tr>
+																	<td>经营情况</td>
+																	<td class="border-no-right text-center">无</td>
+																</tr>
+																<tr>
+																	<td>是否已腾空</td>
+																	<td class="border-no-right"><span class="text-center display-block">否</span></td>
+																</tr>
+																<tr>
+																	<td>租赁情况</td>
+																	<td class="border-no-right"><span class="text-center display-block">无</span></td>
+																</tr>
+																<tr>
+																	<td>过户情况</td>
+																	<td class="border-no-right"><span class="text-center display-block">无</span></td>
+																</tr>
+																<tr>
+																	<td>钥匙</td>
+																	<td class="border-no-right"><span class="text-center display-block">无</span></td>
+																</tr>
+															</tbody>
+														</table>
+													</td>
+												</tr>
+												<tr>
+													<td>提供的文件</td>
+													<td>1.《法院裁定书》2.《协助执行通知书》3.《拍卖成交确认书》</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="item-2 xiaoqu-box">
+										<table cellpadding="10" class="production-introduction text-center">
+											<tbody>
+												<tr>
+													<td>权利限制情况</td>
+													<td class="p-0">
+														<table class="inside-table float-block ">
+															<tbody>
+																<tr>
+																	<td class="border-no-top left-part-40">查封</td>
+																	<td class="border-no-top border-no-right left-part-60"><span class="display-block text-center">江苏省南通市中级人民法院</span></td>
+																</tr>
+																<tr>
+																	<td>抵押</td>
+																	<td class="border-no-right"><span class="text-center display-block">无</span></td>
+																</tr>
+															</tbody>
+														</table>
+													</td>
+												</tr>
+												<tr>
+													<td>标的物介绍</td>
+													<td class="p-0">
+														<table class="inside-table float-block ">
+															<tbody>
+																<tr>
+																	<td class="border-no-top left-part-40">建筑总面积</td>
+																	<td class="border-no-top border-no-right text-center left-part-60">46.46 m²</td>
+																</tr>
+																<tr>
+																	<td>公摊总面积</td>
+																	<td class="border-no-right text-center"><span>14.255 m²</span></td>
+																</tr>
+																<tr>
+																	<td>土地总面积</td>
+																	<td class="border-no-right text-center">
+																		<!---->
+																	</td>
+																</tr>
+																<tr>
+																	<td>房产年龄</td>
+																	<td class="border-no-right text-center"></td>
+																</tr>
+																<tr>
+																	<td>装修情况</td>
+																	<td class="border-no-right text-center"><span class="text-center">无</span></td>
+																</tr>
+																<tr>
+																	<td>房屋户型</td>
+																	<td class="border-no-right text-center">
+																		<!---->
+																		<!---->
+																		<!---->
+																	</td>
+																</tr>
+																<tr>
+																	<td>房屋楼层</td>
+																	<td class="border-no-right text-center">
+																		<!---->
+																		<!---->
+																	</td>
+																</tr>
+																<tr>
+																	<td>房屋朝向</td>
+																	<td class="border-no-right text-center"></td>
+																</tr>
+																<tr>
+																	<td>周边配套</td>
+																	<td class="border-no-right text-center">该房屋位于南通叠石桥家纺城处，地理位置优越，周围商业氛围浓厚。附近有宁启高速，交通便利。特别适合初期创业者在此办公。</td>
+																</tr>
+																<tr>
+																	<td>其他介绍</td>
+																	<td class="border-no-right text-center">该房屋有租赁。经审查，租赁合同到期时间为2018年2月10日。承租人租金已付清。买受人须承受该租赁。法院已在门口张贴拍卖公告等文书。</td>
+																</tr>
+															</tbody>
+														</table>
+													</td>
+												</tr>
+												<tr>
+													<td>标的物估值</td>
+													<td class="p-0">
+														<table class="inside-table float-block ">
+															<tbody>
+																<tr>
+																	<td class="border-no-top left-part-40">标的评估总价</td>
+																	<td class="border-no-top border-no-right left-part-60 text-center"><span>487800 元</span></td>
+																</tr>
+																<tr>
+																	<td>税费情况</td>
+																	<td class="border-no-right p-0"></td>
+																</tr>
+																<tr>
+																	<td>其他费用情况</td>
+																	<td class="border-no-right"></td>
+																</tr>
+															</tbody>
+														</table>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							
+							<div class="inside-nav-part clear-both" offsettop="3282">
+								<p id="gg" class="text-center size1_5em p-b-15 ">公告·须知</p>
+								<div class="shadow-line m-b-30"></div>
+								<p class="text-center size1_3em m-b-30">拍卖公告</p>
+								<p>
+									<p style="\'background:" white="" text-align:="" center="" line-height:="" 40="" 0px="" text-indent:="" 43=""><span style="\'color:" black="" font-size:="" 19="" 0px="">拍卖公告</span></p>
+									<p style="\'background:" white="" text-align:="" center="" line-height:="" 40="" 0px="" text-indent:="" 43=""><span style="\'color:" 404040="" font-size:="" 16="" 0px="">&nbsp;</span></p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 34="" text-justify:="" inter-ideograph=""><span><span style="\'color:" black="">江苏省南通市中级人民法院将于<strong><span><span>2018</span>年<span>1</span>月<span>22</span>日<span>10:00</span>至<span>1</span>月<span>23</span>日<span>10</span>：<span>00</span>止</span>
+										</strong>（延时的除外）在江苏省南通市中级人民法院淘宝网司法拍卖网络平台上（<span>网址：</span></span><span><span style="\'color:" black=""><a target="\'_blank\'">http://sf.taobao.com/0513/06</a></span></span><span style="\'color:" black="">，户名：江苏省南通市中级人民法院）进行公开拍卖活动，现公告如下：</span></span>
+									</p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 34="" text-justify:="" inter-ideograph=""><span><span style="font-weight: bold;"><span style="\'color:" black="">一、拍卖标的：</span><span><span style="\'color:" black="">位于川姜镇南通家纺城家纺大酒店幢<span>406</span>室不动产及附属设施（按现状拍卖交接）</span>
+										</span>
+										</span><span style="\'color:" black="">。评估价<strong><span><span>48.78</span></span>万</strong>元。</span>
+										</span>
+									</p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 34="" text-justify:="" inter-ideograph=""><span><strong><span style="\'color:" black="">二、拍卖安排：</span></strong>
+										</span>
+									</p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 34="" text-justify:="" inter-ideograph=""><span style="\'color:" black="">本标的拟进行网上两次拍卖，当次拍卖流拍的，进行下一次拍卖；当次拍卖成交的，后续拍卖自动取消。</span></p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 34="" text-justify:="" inter-ideograph=""><span><strong><span style="\'color:" black="">三、拍卖方式及保留价、起拍价：</span></strong>
+										</span>
+									</p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 34="" text-justify:="" inter-ideograph=""><span style="\'color:" black="">设有保留价的增价拍卖方式，保留价即起拍价。<strong>另特别提示：司法拍卖不限制竞买人数量，<span>1</span>人报名参与竞拍，即具备成交条件。</strong>
+										</span>
+									</p>
+									<p style="\'background:" white="" margin:="" 0="" 0px="" 37="" text-align:="" justify="" line-height:="" 27="" text-indent:="" 2="" text-justify:="" inter-ideograph=""><span><strong><span style="\'color:" black="">一拍起拍价</span></strong><span style="\'color:" black="">：<strong><span><span>34.15</span></span>万</strong>元，保证金：<strong><span><span>5</span>万</span></strong>元，增价幅度：<strong><span><span>1</span>万</span></strong>元。</span>
+										</span>
+									</p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 34="" text-justify:="" inter-ideograph=""><span><strong><span style="\'color:" black=""></span></strong>
+										</span><span><strong><span style="\'color:" black="">四、咨询、展示看样的时间与方式：</span></strong><span><span style="\'color:" 000000="">自<strong><span>拍卖前<span>1</span>日</span>
+										</strong>止接受咨询，</span><span style="\'color:" black="">本院委托杭州网络科技有限公司代为接受咨询。咨询电话：<span><span>400-1571060</span></span>，有意者请与杭州网络科技有限公司联系统一安排看样。</span>
+										</span>
+										</span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 36=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">五、竞买人条件</span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">：</span></span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 36=""><span><span style="\'color:" black="" font-size:="" 16="" 0px="">凡具备完全民事行为能力的公民、法人和其他组织均可参加竞买。如参与竞买人未开设淘宝账户，可委托代理人（具备完全民事行为能力的自然人）进行，但须在竞买开始前向</span><span><span style="\'color:" black="" font-size:="" 16="" 0px="">南通市中级人民</span></span><span style="\'color:" black="" font-size:="" 16="" 0px="">法院</span><span style="\'color:" black="" font-size:="" 16="" 0px="">办理委托手续；竞买成功后，竞买人（法定代表人、其他组织的负责人）须与委托代理人一同到</span><span><span style="\'color:" black="" font-size:="" 16="" 0px="">南通市中级人民</span></span><span style="\'color:" black="" font-size:="" 16="" 0px="">法院</span><span style="\'color:" black="" font-size:="" 16="" 0px="">办理交接手续。如委托手续不全，竞买活动认定为委托代理人的个人行为。</span></span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 36=""><span style="\'color:" black="" font-size:="" 16="" 0px="">因不符合条件参加竞买的，由竞买人自行承担相应的法律责任。</span></p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 34="" text-justify:="" inter-ideograph=""><span><strong><span style="\'color:" black="">六、本次拍卖活动设置延时出价功能，在拍卖活动结束前，每最后<span>5</span>分钟如果有竞买人出价，就自动延迟<span>5</span>分钟。</span>
+										</strong>
+										</span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 24="" 0px="" text-indent:="" 34=""><span><strong><span style="\'color:" black="">七、</span></strong><span style="\'color:" black="">标的物以实物现状为准，法院不承担拍卖标的真伪、品质及瑕疵保证。特别提醒，有意者请亲自实地看样，未看样的竞买人视为对本标的实物现状的确认，责任自负。</span></span>
+									</p>
+									<p style="\'line-height:" 27="" 0px=""><span style="\'color:" 000000=""><span><span style="\'font-size:" 16="" 0px=""><span>&nbsp;&nbsp;&nbsp; </span></span>
+										</span><span><span style="\'color:" black="" font-size:="" 16="" 0px="">拍卖物按现状拍卖移交，可能因已发现或未发现的法律风险，影响成交及移交时间，竞买人由此可能产生的损失、不便及拍卖回转，属于司法拍卖的必要法律风险，由竞拍人自担（瑕疵详见竞价标的调查情况表）。</span></span>
+										</span>
+									</p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 34="" text-justify:="" inter-ideograph=""><span><strong><span style="\'color:" black="">八、</span></strong><span style="\'color:" black="">标的物过户登记手续由买受人自行办理，因拍卖过户形成的税费按现有法律、行政法规及当地政策由双方各自承担，上述一切费用由买受人在办理过户登记手续时预付，经本院确认后凭票报支。</span><span style="font-weight: bold;"><span><span style="\'color:" black="">买受人垫付的税费，应向以上征收机关索取欠费依据及发票，于交费之日起<span>7</span>日内向本院书面申请，本院将依法确定是否许可。超过期限主张的，责任自负。可能存在的物业费、水、电等欠费均由买受人承担。</span>
+										</span>
+										</span>
+										</span>
+									</p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 34="" text-justify:="" inter-ideograph=""><span><strong><span style="\'color:" black="">九、</span></strong><span style="\'color:" black="">与本标的物有关人员<span>[</span>案件当事人、担保物权人（质押权人）、优先购买权人等<span>]</span>均可参加竞拍，不参加竞拍的请关注本次拍卖活动的整个过程。</span>
+										</span>
+									</p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 34="" text-justify:="" inter-ideograph=""><span><strong><span style="\'color:" black="">十、</span></strong><span style="\'color:" black="">拍卖竞价前淘宝系统将冻结竞买人支付宝账户内的资金作为应缴的保证金，拍卖结束后未能竞得者冻结的保证金自动解冻，冻结期间不计利息。本标的物竞得者原冻结的保证金自动转入法院指定账户，拍卖余款在<strong><span>成交后十五日内</span></strong>缴入法院指定账户<span>(</span><strong>户名：</strong></span>
+										</span><span style="\'color:" 000000=""><span style="font-weight: bold;"><span><span>江苏省南通市中级人民法院；开户行：中行南通市濠南路支行；账号：<span>496258228489</span></span>
+										</span>
+										</span><span><span style="\'color:" black="">)</span></span>
+										</span><span><span><span style="\'color:" black="">，</span></span><span style="\'color:" black="">拍卖未成交的，竞买人冻结的保证金自动解冻，冻结期间不计利息。</span></span>
+									</p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 34="" text-justify:="" inter-ideograph=""><span><strong><span style="\'color:" black="">十一</span></strong><span style="\'color:" black="">、<strong>拍卖成交后买受人悔拍的，交纳的保证金不予退还，依次用于支付拍卖产生的费用损失、弥补重新拍卖价款低于原拍卖价款造成的差价、冲抵本案被执行人的债务以及与拍卖财产相关的被执行人的债务。悔拍后重新拍卖的，原买受人不得参加竞买。特别提示：<span>悔拍后重新拍卖的，原买受人不得参加竞买，价格如低于原悔拍价款，所造成的差价、费用损失等，由原买受人承担。且要交纳重新拍卖的差价，并视情进行采取相应的强制执行措施</span>。</strong>
+										</span>
+										</span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 24="" 0px="" text-indent:="" 34=""><span><strong><span style="\'color:" black="">十二、</span><span style="\'color:" black="">中国银行南通分行可为竞买人提供拍品按揭贷款服务（住宅最高可贷成交价的<span>75%</span>，商铺最高可贷成交价的<span>50%</span>），拍卖前竞买人如有贷款意向可向银行提前咨询、申请。</span>
+										</strong>
+										</span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 24="" 0px="" text-indent:="" 34=""><strong><span style="\'color:" black="">联系人：中行南通分行营业部蔡扬江子，联系电话：<span>18118668236</span></span></strong></p>
+									<p style="\'text-indent:" 31="" 0px=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">十三、公告送达事项。</span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">本院在</span><span style="\'color:" 000000=""><span style="\'font-size:" 16="" 0px="">拍卖公告发布三日前，已以<span>EMS</span>法院专递方式，向生效法律文书载明的当事人地址，送达了拍卖裁定、拍卖通知，并现场公告。如遇退信，依《最高人民法院关于以法院专递方式邮寄送达民事诉讼文书的若干规定》视为送达，并在此根据《</span><span style="\'color:" black="" font-size:="" 16="" 0px="">最高人民法院关于人民法院网络司法拍卖若干问题的规定》，<strong>在</strong></span><strong><span style="\'font-size:" 16="" 0px="">本网络司法拍卖平台公示，公示满五日视为已经通知。请相关人员务必与本院联系。</span></strong></span>
+										</span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 24="" 0px="" text-indent:="" 34=""><span><strong><span>十四、杭州网络科技有限公司目前为本拍卖提供网络司法拍卖辅助性工作，有关看样、提供咨询等辅助费事务，本院在本公告期内委托其办理，<span>其咨询介绍、答复等均仅供参考，一切以现场现状及有关登记为准</span>。<span>本院未委托、授权杭州网络科技有限公司及其工作人员收取成交前拍卖看样、咨询等费用</span>。成交后，成交人可自行委托杭州网络科技有限公司办理过户等商业代理事项，<span>与司法拍卖无涉。</span></span>
+										</strong>
+										</span>
+									</p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-justify:="" inter-ideograph=""><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">&nbsp;</span></strong></p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 16="" text-justify:="" inter-ideograph=""><span><span style="\'color:" black="">竞买人在拍卖竞价前请务必再仔细阅读本院发布的拍卖须知。</span></span>
+									</p>
+									<p style="\'background:" white="" margin:="" 0="" 0px="" 16="" text-align:="" justify="" line-height:="" 27="" text-justify:="" inter-ideograph=""><span style="\'color:" black="">咨询电话<span>：<span>0513-68506567</span>（吴法官），0513-68506485；<span>400-1571060</span>（网）</span>
+										</span>
+									</p>
+									<p style="\'background:" white="" margin:="" 0="" 0px="" 16="" text-align:="" justify="" line-height:="" 27="" text-justify:="" inter-ideograph=""><span style="\'color:" black="">监督电话<span><span><span>&nbsp; </span>89070666 </span>
+										</span><span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span></span></span>
+										</span>
+									</p>
+									<p style="\'background:" white="" margin:="" 0="" 0px="" 16="" text-align:="" justify="" line-height:="" 27="" text-justify:="" inter-ideograph=""><span><span style="\'color:" black="">联系地址：<span> 南通市工农路<span>246</span>号南通市中级人民法院执行局</span>
+										</span>
+										</span>
+									</p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 16="" text-justify:="" inter-ideograph=""><span style="\'color:" black="">网址<span><span>: http://sf.taobao.com/0513/06 </span></span>
+										</span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 24="" 0px="" text-indent:="" 34=""><span><span style="\'color:" black="">特别提示：任何符合条件的竞买人均可在</span><span style="\'color:" 000000=""><span>淘宝网司法拍卖网络平台上自行参与竞买。</span></span>
+										</span>
+									</p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 16="" text-justify:="" inter-ideograph=""><span style="\'color:" 404040="">&nbsp;</span></p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 40="" 0px="" text-indent:="" 322="" text-justify:="" inter-ideograph=""><span style="\'color:" black="" font-size:="" 16="" 0px="">&nbsp;</span></p>
+									<p style="\'background:" white="" text-align:="" right="" line-height:="" 40="" 0px="" text-indent:="" 276=""><span style="\'color:" black="">江苏省南通市中级人民法院</span></p>
+									<p style="\'background:" white="" text-align:="" right="" line-height:="" 40="" 0px="" text-indent:="" 288=""><span style="\'color:" black="">二○一七年十二月十八日</span></p>
+									<p></p>
+								</p>
+								<p class="text-center size1_3em m-b-30">公告&须知</p>
+								<p>
+									<p style="\'background:" white="" text-align:="" center="" line-height:="" 35="" 0px="" text-indent:="" 43=""><span style="\'font-size:" 19="" 0px="">拍卖须知</span></p>
+									<p style="\'background:" white="" text-align:="" center="" line-height:="" 35="" 0px="" text-indent:="" 43=""><span style="\'color:" black="" font-size:="" 16="" 0px="">&nbsp;</span></p>
+									<p style="\'background:" white="" text-align:="" justify="" line-height:="" 27="" 0px="" text-indent:="" 34="" text-justify:="" inter-ideograph=""><span><span style="\'color:" black="">江苏省南通市中级人民法院定于<strong><span><span>2018</span>年<span>1</span>月<span>22</span>日<span>10</span>：<span>00</span>至<span>1</span>月<span>23</span>日<span>10</span>：<span>00</span>止</span>
+										</strong>（延时的除外）在江苏省南通市中级人民法院淘宝网司法拍卖网络平台上（<span>网址：</span></span><span><span style="\'color:" black=""><a target="\'_blank\'">http://sf.taobao.com/0513/06</a></span></span><span style="\'color:" black=""><a href="\'http://sf.taobao.com/law_court.htm?spm=1.221999.238917.1&amp;user_id=829073545\'" target="\'_blank\'"></a></span><span style="\'color:" black="">，户名：江苏省南通市中级人民法院）进行公开拍卖活动，现就有关的网上拍卖事宜敬告各位竞买人：</span></span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 28=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">一、</span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">本《拍卖须知》根据《中华人民共和国民事诉讼法》等相关法律规定所制订，竞买人应认真仔细阅读，了解本须知的全部内容。</span></span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 28=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">二、</span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">本次拍卖活动遵循“公开、公平、公正、诚实守信”的原则，拍卖活动具备法律效力。参加本次拍卖活动的当事人和竞买人必须遵守本须知的各项条款，并对自己的行为承担法律责任。</span></span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 37=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">三、</span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">凡具备完全民事行为能力的公民、法人和其他组织均可参加竞买。如参与竞买人未开设淘宝账户，可委托代理人（具备完全民事行为能力的自然人）进行，但须在竞买开始前向<span>南通市中级人民</span>法院办理委托手续；竞买成功后，竞买人（法定代表人、其他组织的负责人）须与委托代理人一同到<span>南通市中级人民</span>法院办理交接手续</span><span style="\'color:" black="" font-size:="" 16="" 0px="">。</span><span style="\'color:" black="" font-size:="" 16="" 0px="">如委托手续不全，竞买活动认定为委托代理人的个人行为。</span></span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 37=""><span><span style="\'color:" black="" font-size:="" 16="" 0px="">不符合条件参加竞买的，竞买人自行承担相应的法律责任。</span></span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 37=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">四、</span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">优先购买权人参加竞买的，应于</span><strong><span><span style="\'color:" black="" font-size:="" 16="" 0px="">所属拍卖阶段开始五日</span></span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">前向法院提交有效证明，经法院确认后才能以优先购买权人身份参与竞买；逾期不提交的，视为放弃对本标的物享有的优先购买权。<strong></strong></span></span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 37=""><span><span style="\'color:" black="" font-size:="" 16="" 0px=""><strong>五、</strong>与本标的物有利害关系的当事人可参加竞拍，不参加竞拍的请关注本次拍卖活动的整个过程。</span></span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 37=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">六、本次拍卖活动设置延时出价功能，在拍卖活动结束前，每最后<span>5</span>分钟如果有竞买人出价，就自动延迟<span>5</span>分钟。</span>
+										</strong>
+										</span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 37=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">七、</span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">竞拍前竞买人的支付宝账户中应有足够的余额支付拍卖保证金。竞买人在对拍卖标的物第一次确认出价竞拍前，按淘宝系统提示报名缴纳保证金，系统会自动冻结该笔款项。拍卖成交的，本标的物竞得者（以下称买受人）冻结的保证金将自动转入法院指定账户，其他竞买人的保证金在拍卖后即时解冻。拍卖未成交的（即流拍的），竞买人的保证金在拍卖活动结束后即时解冻，保证金冻结期间不计利息。</span></span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 36=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">八、</span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">本次拍卖是经法定公告期和展示期后才举行的，已根据评估公司调查情况就拍卖标的物已知及可能存在的瑕疵已在本次拍买资料中作了详尽的说明。拍卖人对拍卖标的物所作的说明和提供的视频资料、图片等，仅供竞买人参考，不构成对标的物的任何担保。所以请竞买人在拍卖前必须仔细审查拍卖标的物，调查是否存在瑕疵，认真研究查看所竞买标的物的实际情况，并<strong>请亲临展示现场，实地看样，未看样的竞买人视为对本标的实物现状的确认，慎重决定竞买行为，竞买人一旦作出竞买决定，即表明已完全了解，并接受标的物的现状和一切已知及未知的瑕疵。</strong></span></span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 36=""><span style="\'color:" black="" font-size:="" 16="" 0px="">对拍卖标的能否办理过户手续以及办理时间等情况，请竞买人在竞买前自行到相关职能部门咨询确认，因标的物现状及存在瑕疵等原因不能或者延迟办理过户手续及办理二次过户造成的费用增加的后果自负，拍卖人不作过户的任何承诺，不承担过户涉及的一切费用。涉及违法违章部分，由买受人自行去行政主管部门依照有关行政法规处理。</span></p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 36=""><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">法院解除查封手续需要一定时间，拍卖标的物相关权证原件无法取得或存在担保物权的，办理标的物权属变更登记时需办理登报注销手续或注销他项权证，办理权属变更登记的时间会延长。</span></strong></p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 32=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">九</span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">、拍卖成交后，买受人应于</span><strong><span><span style="\'color:" black="" font-size:="" 16="" 0px="">成交后十五日内</span></span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">将拍卖成交价余款（扣除保证金后的余款）缴入法院指定账户<span>(</span><span>户名：<strong>江苏省南通市中级人民法院；开户行：中行南通市濠南路支行；账号：<span>496258228489</span></strong>
+										</span><span>)</span>，并在<strong><span>缴纳余款后十日</span></strong><span>内</span>（凭法院财务室收据、付款凭证及相关身份材料、委托手续等原件）到<span>南通市中级人民法院执行局</span>签署《拍卖成交确认书》，于签订确认书后<strong><span>三十个工作日</span></strong>内到南通市中级人民法院执行局领取民事裁定书，办理拍卖标的物交付手续。</span>
+										</span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 37=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">十、</span><span><span style="\'color:" black="" font-size:="" 16="" 0px="">买受人逾期未支付拍卖款及悔拍的，法院可以重新拍卖。重新拍卖时，原买受人不得参加竞买，保证金不予退还</span></span>
+										</strong><span style="\'color:" black="" font-size:="" 16="" 0px="">；保证金数额不足以弥补重新拍卖价款低于原拍卖价款的差价的，可以责令原买受人补交，拒不补交的，法院强制执行。</span></span>
+									</p>
+									<p style="\'background:" white="" text-align:="" left="" line-height:="" 24="" 0px="" text-indent:="" 37=""><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">特别提醒：司法网络拍卖属人民法院委托司法拍卖的司法活动，感谢参与竞拍，支持执行变现工作，但竞买人在参加时请认真阅读网拍公告及须知等各项公示资料，依法参与竞拍；对在网拍中，恶意抬价，扰乱司法拍卖秩序的，人民法院可以依照《中华人民共和国民事诉讼法》第一百一十一条及有关司法解释的规定，对其罚款、拘留，构成的犯罪的，依法追究刑事责任。</span></strong></p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 37=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">十一、</span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">买受人付款后应及时提取标的物，并办理过户交接手续，逾期不办理不取走标的物的，买受人应支付由此产生的费用，并承担本标的物可能发生的损毁、灭失等后果。</span></span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 37=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">十二、</span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">本次拍卖活动计价货币为人民币，拍卖时的起拍价、成交价均不含买受人在拍卖标的物交割、过户时所发生的全部费用和税费。</span></span>
+									</p>
+									<p style="\'background:" white="" text-align:="" left="" line-height:="" 24="" 0px="" text-indent:="" 37=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">十三、</span><span style="\'color:" black="" font-size:="" 16="" 0px="">买受人应自行办理水、电等户名变更手续，相关费用自理。对可能存在的影响标的物使用的水、电、物业管理等<span>欠费、欠税（过户税收以外的税务）</span>由买受人自行解决，拍卖人不承担上述费用，未明确缴费义务人的费用也由买受人自行解决。</span>
+										</strong>
+										</span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 37=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">十四、</span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">参加竞买的人应当遵守拍卖须知的规定，不得阻挠其他竞买人竞拍，不得操纵、垄断竞拍价格，严禁竞买人恶意串标，上述行为一经发现，将取消其竞买资格，并追究相关的法律责任。</span></span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 37=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">十五、</span><span style="\'font-size:" 16="" 0px="">根据法律规定，法院有权在拍卖开始前、拍卖过程中，中止拍卖或撤回拍卖。网拍成功后，因解决法律等争议，法院有权暂缓成交确认、移交、撤销网拍成交确认等，因此而超出原成交、标的物交付时间及网拍不成交致使竞拍失去其他交易机会，系司法拍卖的法律风险，人民法院不承担该责任，由此并不发生拍卖款的扣减、国家赔偿等。</span></strong>
+										</span>
+									</p>
+									<p style="\'background:" white="" line-height:="" 27="" 0px="" text-indent:="" 37=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">十六、</span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">为便于买受人及时收到人民法院拍卖相关的文书，竞买人在拍卖竞价前如实向淘宝网司法拍卖网络平台提供确切的送达地址或者主动与法院联系。如需更改地址，买受人应及时与法院联系确认更改。因提供的送达地址不确切，或未及时告知变更地址，导致法院有关法律文书无法送达的，由竞买人自行承担由此可能产生的法律后果。</span></span>
+									</p>
+									<p style="\'line-height:" 27="" 0px="" text-indent:="" 32=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">十七、</span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">依照法释〔<span>2016</span>〕<span>18</span>号《最高人民法院关于人民法院网络司法拍卖若干问题的规定》，竞买人成功竞得网拍标的物后，淘宝网拍平台将生成相应《司法拍卖网络竞价成功确认书》，确认书中载明实际买受人姓名、网拍竞买号信息。</span>
+										</span>
+									</p>
+									<p style="\'line-height:" 27="" 0px="" text-indent:="" 32=""><span><strong><span style="\'color:" black="" font-size:="" 16="" 0px="">十八、</span></strong><span style="\'color:" black="" font-size:="" 16="" 0px="">凡发现拍卖中有违规行为，可如实举报。</span></span>
+									</p>
+									<p style="\'line-height:" 27="" 0px="" text-indent:="" 32=""><span style="\'color:" black="" font-size:="" 16="" 0px="">举报监督电话<span>：<span>0513-89070666</span></span>。</span>
+									</p>
+									<p style="\'background:" white="" text-align:="" left="" line-height:="" 24="" 0px="" text-indent:="" 37=""><span style="\'color:" black="" font-size:="" 16="" 0px="">本规则其他未尽事宜，请向法院咨询。</span></p>
+									<p style="\'background:" white="" text-align:="" left="" line-height:="" 24="" 0px="" text-indent:="" 37=""><span><span style="\'color:" black="" font-size:="" 16="" 0px="">法院咨询电话：<span><span>0513-</span></span>
+										</span><span><span style="\'color:" black="" font-size:="" 16="" 0px=""> 68506567；0513-68506485</span></span><span style="\'color:" black="" font-size:="" 16="" 0px="">。</span></span>
+									</p>
+									<p style="\'line-height:" 27="" 0px="" text-indent:="" 32=""><span style="\'color:" black="" font-size:="" 16="" 0px="">&nbsp;</span></p>
+									<p style="\'text-align:" right="" line-height:="" 40="" 0px="" text-indent:="" 280=""><span style="\'color:" black="" font-size:="" 16="" 0px="">&nbsp;</span></p>
+									<p style="\'text-align:" right="" line-height:="" 40="" 0px="" text-indent:="" 280=""><span style="\'color:" black="" font-size:="" 16="" 0px="">&nbsp;</span></p>
+									<p style="\'text-align:" right="" line-height:="" 40="" 0px="" text-indent:="" 280=""><span><span style="\'color:" black="" font-size:="" 16="" 0px=""><span>&nbsp;</span></span><span style="\'color:" black="" font-size:="" 16="" 0px="">江苏省南通市中级人民法院</span></span>
+									</p>
+									<p style="\'text-align:" right="" line-height:="" 40="" 0px="" text-indent:="" 288=""><span style="\'color:" black="" font-size:="" 16="" 0px="">二○一七年十二月十八日</span></p>
+									<p></p>
+								</p>
+							</div>
+							<br />
+							<iframe id="sp" style="padding-left:25% ;" height=300 width=510 src='http://player.youku.com/embed/XMzI4MTMyMDIyNA==' frameborder=0 'allowfullscreen'></iframe>
+							<img src="img/1.jpg" style="width: 300px; height: 300px;" />
+							<img src="img/1.jpg" style="width: 300px; height: 300px;" />
+							<img src="img/1.jpg" style="width: 300px; height: 300px;" />
+							
+							<br />
+							<iframe id="dl" src="map.html" width="985px" height="300px" frameborder="0" scrolling="no"></iframe><!--地图-->
+						</div>
+					</div>
+				</div>
+				<footer>
+					<div class="container position-relative">
+						<div class="footer-widge">
+							<a class="back-top-btn" style="display: none;"><i class="material-icons">∧</i></a>
+						</div>
+						<div class="footer-head">
+							<a href="http://admin.laipaiya.com" target="_blank">后台入口</a>
+							<a href="">关于我们</a>
+							<a href="corporation" class="" target="_blank">联系我们</a>
+							<a href="">招聘专区</a>
+							<a href="">网站地图</a>
+							<span class="float-right"><i class="material-icons color-white" style="margin-right: 15px;">T</i> <span class="vertical-middle" style="font-size: 1.3em;">400 - 157 - 1060</span></span>
+						</div>
+						<div class="footer-body i-tab">
+							<div class="footer-tab common-tab">
+								<a class="footer-tab-btn common-tab-btn footer-tab-btn-active">热门城市</a>
+								<a class="footer-tab-btn common-tab-btn">热门搜索</a>
+							</div>
+							<div class="footer-tab-item common-tab-item">
+								<a href=" " title="北京" target="_self">北京</a>
+								<a href=" " title="上海" target="_self">上海</a>
+								<a href=" " title="广州" target="_self">广州</a>
+								<a href=" " title="杭州" target="_self">杭州</a>
+								<a href=" " title="宁波" target="_self">宁波</a>
+								<a href=" " title="天津" target="_self">天津</a>
+								<a href=" " title="南京" target="_self">南京</a>
+								<a href=" " title="合肥" target="_self">合肥</a>
+								<a href=" " title="苏州" target="_self">苏州</a>
+								<a href=" " title="无锡" target="_self">无锡</a>
+								<a href=" " title="福州" target="_self">福州</a>
+								<a href=" " title="重庆" target="_self">重庆</a>
+								<a href=" " title="长沙" target="_self">长沙</a>
+								<a href=" " title="长春" target="_self">长春</a>
+								<a href=" " title="成都" target="_self">成都</a>
+								<a href=" " title="常州" target="_self">常州</a>
+								<a href=" " title="大连" target="_self">大连</a>
+								<a href=" " title="海口" target="_self">海口</a>
+								<a href=" " title="贵阳" target="_self">贵阳</a>
+								<a href=" " title="济南" target="_self">济南</a>
+								<a href=" " title="兰州" target="_self">兰州</a>
+								<a href=" " title="哈尔滨" target="_self">哈尔滨</a>
+								<a href=" " title="呼和浩特" target="_self">呼和浩特</a>
+								<a href=" " title="昆明" target="_self">昆明</a>
+								<a href=" " title="拉萨" target="_self">拉萨</a>
+								<a href=" " title="嘉兴" target="_self">嘉兴</a>
+								<a href=" " title="南昌" target="_self">南昌</a>
+								<a href=" " title="南宁" target="_self">南宁</a>
+								<a href=" " title="石家庄" target="_self">石家庄</a>
+								<a href=" " title="沈阳" target="_self">沈阳</a>
+								<a href=" " title="太原" target="_self">太原</a>
+								<a href=" " title="绍兴" target="_self">绍兴</a>
+								<a href=" " title="武汉" target="_self">武汉</a>
+								<a href=" " title="西安" target="_self">西安</a>
+								<a href=" " title="西宁" target="_self">西宁</a>
+								<a href=" " title="乌鲁木齐" target="_self">乌鲁木齐</a>
+								<a href=" " title="郑州" target="_self">郑州</a>
+							</div>
+							<!---->
+						</div>
+						<div class="footer-footer">
+							<a href="http://www.chinacourt.org/index.shtml" target="_blank" rel="nofollow">中国法院网</a>
+							<a href="http://www.zjcourt.cn/" target="_blank" rel="nofollow">浙江法院新闻网</a>
+							<a href="http://shfy.chinacourt.org/index.shtml" target="_blank" rel="nofollow">上海法院网</a>
+							<a href="http://www.jsfy.gov.cn/" target="_blank" rel="nofollow">江苏法院网</a>
+							<a href="http://bjgy.chinacourt.org/index.shtml" target="_blank" rel="nofollow">北京法院网</a>
+							<a href="http://www.gdcourts.gov.cn/gdgy/s" target="_blank" rel="nofollow">广东法院网</a>
+							<a href="http://www.tmsf.com/" target="_blank" rel="nofollow">透明售房网</a>
+							<a href="http://www.zjpse.com/" target="_blank" rel="nofollow">浙江产权交易所</a>
+							<a href="http://www.cbex.com.cn/" target="_blank" rel="nofollow">北京产权交易所</a>
+						</div>
+						<div class="copyright">
+							<p>© Copyright 2016 laipaiya.com 版权所有 杭州网络科技有限公司 | 浙ICP备15004499号-1 |
+								<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602002655">浙公网安备 33010602002655号</a>
+							</p>
+						</div>
+					</div>
+				</footer>
+				<!---->
+				<!---->
+				<!---->
+			</div>
+			<!---->
+			<!---->
+			<!---->
+		</div>
+		<script type="text/javascript">
+				function ZY() {
+					document.querySelector("#zy").scrollIntoView();
+					$("#zy")[0].scrollIntoView();
+				}
+				function PM() {
+					document.querySelector("#pm").scrollIntoView();
+					$("#pm")[0].scrollIntoView();
+				}
+				function BD() {
+					document.querySelector("#bd").scrollIntoView();
+					$("#bd")[0].scrollIntoView();
+				}
+				function GG() {
+					document.querySelector("#gg").scrollIntoView();
+					$("#gg")[0].scrollIntoView();
+				}
+				function SP() {
+					document.querySelector("#sp").scrollIntoView();
+					$("#sp")[0].scrollIntoView();
+				}
+				function DL() {
+					document.querySelector("#dl").scrollIntoView();
+					$("#dl")[0].scrollIntoView();
+				}
+		</script>
+	</body>
+
+</html>

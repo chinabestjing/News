@@ -1,0 +1,66 @@
+<include file="Common/header" />
+<!-- 载入上传文件 -->
+<js href="__PUBLIC__/js/jquery-2.0.2.js" />
+    <script>
+        KindEditor.ready(function(K) {
+            editor = K.create('textarea[name="n_text"]', {
+                allowFileManager : true
+            });
+            editor = K.create('textarea[name="n_intr"]', {
+                allowFileManager : true
+            });
+        });
+    </script>
+<div id="right-content">
+    <div class="top">
+        <h2>新闻管理 <small>添加新闻</small></h2>
+    </div>
+
+    <form action="{:U('News/add')}" method="post">
+        <div class="table-responsive">
+            <table class="table table-hover">
+
+                <tr>
+                    <td width="100">新闻标题</td>
+                    <td>
+                        <input type="text" class="form-control w400" name="n_title" value="" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>请选择新闻类型</td>
+                    <td>
+                        <select name="n_type" class="form-control w400">
+                            <option value="1">集团新闻</option>
+                            <option value="2">行业新闻</option>
+                            <option value="3">媒体关注</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>新闻内容</td>
+                    <td>
+                        <div class="col-sm-10">
+                            <textarea name="n_text" style="width:800px;height:400px;visibility:hidden;">{$data.i_text2}</textarea>
+                            <!-- <script type="text/plain" id="container" name="i_text1" style="width:100%;height:500px;">{$data.i_text1}</script>-->
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>新闻简介</td>
+                    <td>
+                        <textarea name="n_intro" class="description_box"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="submit" class="btn btn-primary w100">保存</button>
+                        <button type="button" id="f" class="btn btn-primary w100">取消</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+
+<include file="Common/footer" />

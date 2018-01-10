@@ -1,0 +1,38 @@
+<include file="Common/header" />
+<!-- 载入上传文件 -->
+<js href="__PUBLIC__/js/jquery-2.0.2.js" />
+    <script>
+        KindEditor.ready(function(K) {
+            editor = K.create('textarea[name="i_text1"]', {
+                allowFileManager : true
+            });
+        });
+    </script>
+<div id="right-content">
+    <div class="top">
+        <h2>艺术教育设置 <small>首页</small></h2>
+    </div>
+
+    <form action="{:U('School/index')}" method="post">
+        <div class="table-responsive">
+            <table class="table table-hover">
+
+                <tr>
+                    <td>首页内容设置</td>
+                    <td>
+                        <textarea name="i_text1" style="height: 400px;" class="description_box">{$data.i_text1}</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="submit" class="btn btn-primary w100">保存</button>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+
+<include file="Common/footer" />

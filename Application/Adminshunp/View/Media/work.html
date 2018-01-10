@@ -1,0 +1,55 @@
+<include file="Common/header" />
+<link rel="stylesheet" href="__PUBLIC__/page.css" />
+<div id="right-content">
+    <div class="top">
+        <h2>艺术传媒 <small>杂志列表</small></h2>
+    </div>
+    <ul class="nav nav-tabs mt10">
+        <li role="presentation">
+            <a href="__CONTROLLER__/add" >新增杂志</a>
+        </li>
+    </ul>
+    <form action="" method="post">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                 <!--   <th>发布人</th>-->
+                    <th>杂志标题</th>
+                  <!--  <th>阅读量</th>
+                    <th>点赞量</th>-->
+                    <th>杂志链接地址</th>
+                    <th>杂志添加时间</th>
+                    <th width="200">操作</th>
+                </tr>
+                </thead>
+                <volist name="data" id="vo">
+                    <tr>
+                        <td>{$vo.p_id}</td>
+                        <td>{$vo.p_title}</td>
+                        <td>{$vo.p_url}</td>
+
+
+                        <td>{$vo.p_time|date='Y-m-d H:i:s',###}</td>
+                        <td class="handle">
+
+                           <!-- <a href="{:U('Media/edit',array('p_id'=>$vo['p_id']))}" class="edit"><i class="glyphicon glyphicon-pencil"></i>编辑</a>-->
+                            <a href="javascript:;" class="del" onclick="if(confirm('确定删除吗？')) location.href='{:U('Media/del', array('p_id'=>$vo['p_id']))}'">
+                                <i class="glyphicon glyphicon-trash"></i>删除
+                            </a>
+                        </td>
+                    </tr>
+                </volist>
+                <tr>
+                    <div class="meneame">{$page}</div>
+                </tr>
+            </table>
+            <div class="meneame">{$page}</div>
+        </div>
+    </form>
+</div>
+
+
+
+<include file="Common/footer" />

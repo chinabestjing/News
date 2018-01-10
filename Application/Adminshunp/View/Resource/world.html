@@ -1,0 +1,60 @@
+<include file="Common/header" />
+<link rel="stylesheet" href="__PUBLIC__/page.css" />
+<div id="right-content">
+    <div class="top">
+        <h2>人力资源 <small>社会招聘</small></h2>
+    </div>
+
+    <ul class="nav nav-tabs mt10">
+        <li role="presentation">
+            <a href="__CONTROLLER__/teamAdd">添加招聘信息</a>
+        </li>
+    </ul>
+
+    <form action="" method="post">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>招聘职位</th>
+                    <th>招聘简介</th>
+                    <th>发布时间</th>
+                    <th>招聘状态</th>
+                    <th width="200">操作</th>
+                </tr>
+                </thead>
+
+                <volist name="data" id="v">
+                    <tr>
+                        <td>{$i}</td>
+                        <td>{$v.w_title}</td>
+                        <td>{$v.w_text}</td>
+                        <td>
+                            <if condition="$v.w_state eq 1 ">
+                                <span style="color:blue;">在聘</span>
+                                <else />
+                                <span style="color:red;">停聘</span>
+                            </if>
+                        </td>
+                        <td>{$v.w_time|date='Y-m-d H:i:s',###}</td>
+                        <td class="handle">
+                            <a href="{:U('Resource/change',array('id'=>$v['w_id'],'key'=>$v['w_state']))}" class="edit"><i class="glyphicon glyphicon-pencil"></i>切换</a>
+                            <a href="javascript:;" class="del" onclick="if(confirm('确定删除吗？')) location.href='{:U('Resource/del', array('id'=>$v['w_id']))}'">
+                                <i class="glyphicon glyphicon-trash"></i>删除
+                            </a>
+                        </td>
+                    </tr>
+                </volist>
+                <tr>
+                    <div class="meneame">{$page}</div>
+                </tr>
+            </table>
+            <div class="meneame">{$page}</div>
+        </div>
+    </form>
+</div>
+
+<include file="Common/footer" />
+
+

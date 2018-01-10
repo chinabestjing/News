@@ -1,0 +1,55 @@
+<include file="Common/header" />
+<div id="right-content">
+    <div class="top">
+        <h2>系统设置 <small>轮播图列表</small></h2>
+    </div>
+    <ul class="nav nav-tabs mt10">
+        <li role="presentation">
+            <a href="__CONTROLLER__/add" >新增轮播图</a>
+        </li>
+    </ul>
+    <form action="" method="post">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>缩略图</th>
+                    <th>图片标题</th>
+                    <th>图片状态</th>
+                    <th>上传时间</th>
+                    <th width="200">操作</th>
+                </tr>
+                </thead>
+                    <volist name="data" id="vo">
+                    <tr>
+                        <td><img src="{$vo.b_pic}" title="轮播图" style="width: 100px; height: 60px;" /></td>
+                        <td>
+                            {$vo.b_pic_text}
+                        </td>
+                        <td>
+                            <if condition="$vo.b_state eq 1">
+                                <span style="color:blue">启用</span>
+                                <else/>
+                                <span style="color:red">禁用</span>
+                            </if>
+                        </td>
+                        <td>
+                            {$vo.b_time|date='Y-m-d H:i:s',###}
+                        </td>
+                        <td class="handle">
+                            <a href="{:U('Carousel/del',array('id'=>$vo['b_id']))}" class="del"><i class="glyphicon glyphicon-pencil"></i>删除</a>
+                            <a href="{:U('Carousel/change',array('id'=>$vo['b_id'],key=>$vo['b_state']))}" class="edit"><i class="glyphicon glyphicon-pencil"></i>切换</a>
+                        </td>
+                    </tr>
+                        </volist>
+                <tr>
+                    <td colspan="10" align="right">{$page}</td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+
+
+
+<include file="Common/footer" />

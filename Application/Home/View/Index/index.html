@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/text.css">
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>首页</title>
+		<link rel="shortcut icon" href="__PUBLIC__/Home/logo.ico" type="img/x-icon">
+		<link rel="stylesheet" href="__PUBLIC__/Home/css/new_fie.css" />
+		<link rel="stylesheet" href="__PUBLIC__/Home/css/new_file.css" />
+		<link rel="stylesheet" href="__PUBLIC__/Home/css/ft-carousel.css" />
+		<!--
+        	<script src="https://hm.baidu.com/hm.js?25267f815d19ca3f16af3eea13a101b8"></script>
+        -->
+		<script async="" charset="utf-8" src="__PUBLIC__/Homejs/udeskApi.js"></script>
+		<script src="__PUBLIC__/Home/js/redirect.js"></script>
+		<script src="__PUBLIC__/Home/js/polyfill.min.js"></script>
+		<script src="__PUBLIC__/Home/js/jquery-2.1.4.min.js"></script>
+		<script src="__PUBLIC__/Home/js/common.js"></script>
+		<!--<script type="text/javascript" src="js/focus.js" ></script>-->
+		<script src="//g.alicdn.com/??kissy/k/1.4.16/seed-min.js,kg/kmd-adapter/0.1.5/index.js,kg/kmd-adapter/0.1.5/util.js,kg/global-util/1.0.5/index-min.js,tb/tracker/4.0.1/p/index/index.js,kg/tb-nav/2.5.3/index-min.js"></script>
+		<!--zhuyi-->
+		<style type="text/css">
+			.alert-wrap {
+				height: 662px
+			}
+		</style>
+		<link href="__PUBLIC__/Home/css/one.css" rel="stylesheet">
+		<style type="text/css">
+			.el-vue-amap-container,
+			.el-vue-amap-container .el-vue-amap {
+				height: 100%
+			}
+		</style>
+		<style type="text/css">
+			.el-vue-search-box-container {
+				position: relative;
+				width: 360px;
+				height: 45px;
+				background: #fff;
+				box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+				border-radius: 2px 3px 3px 2px;
+				z-index: 10
+			}
+
+			.el-vue-search-box-container .search-box-wrapper {
+				position: absolute;
+				display: flex;
+				align-items: center;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				box-sizing: border-box
+			}
+
+			.el-vue-search-box-container .search-box-wrapper input {
+				flex: 1;
+				height: 20px;
+				line-height: 20px;
+				letter-spacing: .5px;
+				font-size: 14px;
+				text-indent: 10px;
+				box-sizing: border-box;
+				border: none;
+				outline: none
+			}
+
+			.el-vue-search-box-container .search-box-wrapper .search-btn {
+				width: 45px;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: transparent;
+				cursor: pointer
+			}
+
+			.el-vue-search-box-container .search-tips {
+				position: absolute;
+				top: 100%;
+				border: 1px solid #dbdbdb;
+				background: #fff;
+				overflow: auto
+			}
+
+			.el-vue-search-box-container .search-tips ul {
+				padding: 0;
+				margin: 0
+			}
+
+			.el-vue-search-box-container .search-tips ul li {
+				height: 40px;
+				line-height: 40px;
+				box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+				padding: 0 10px;
+				cursor: pointer
+			}
+
+			.el-vue-search-box-container .search-tips ul li.autocomplete-selected {
+				background: #eee
+			}
+		</style>
+		<meta name="keywords" content="司法拍卖辅助平台" data-vue-meta="true">
+		<meta name="description" content="司法拍卖辅助平台" data-vue-meta="true">
+	</head>
+
+	<body>
+		<div id="app">
+			<div db="">
+				<!--http://api.faepai.com/index.php/Web/Interface/-->
+				<div class="header-image bg" style="background-image: url(__PUBLIC__/Home/img/banner.jpg);"></div>
+				<div>
+					<div class="nav index-nav">
+						<div class="container clear-both">
+							<div class="nav-left">
+								<a href="#" class="logo-main inline-block m-r-10 router-link-exact-active router-link-active">
+									<img src="__PUBLIC__/Home/img/logo-main.png">
+								</a>
+								<div class="nav-list inline-block">
+									<a href="{:U('Index/index')}" class="nav-list-item router-link-exact-active router-link-active">首页</a>
+									<a href="{:U('court/index')}" class="nav-list-item">法院</a>
+									<a href="{:U('list/index')}" class="nav-list-item">货品·预约</a>
+									<a href="{:U('Sign/index')}" tag="a" target="_blank" class="nav-list-item">法院监管</a>
+									<a href="{:U('Job/index')}" class="nav-list-item">招聘英才</a>
+									<a href="{:U('Contact/index')}" class="nav-list-item">联系我们</a>
+								</div>
+							</div>
+							<div class="nav-right  clear-both">
+
+								<div class="nav-search"><input type="text" placeholder="搜索标的物"> <i class="material-icons nav-search-icon cursor-pointer">O</i></div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="grey-container">
+					<div class="container container-padding">
+
+						<style>
+							.song-ti-single {
+								overflow: hidden;
+								white-space: nowrap;
+								float: left;
+								display: inline;
+								width: 212px !important;
+								height: 30px !important;
+								border: 1px solid #CF1D00;
+								border-radius: 3px;
+								line-height: 30px;
+								box-sizing: border-box;
+								text-align: center;
+								cursor: pointer;
+							}
+
+							.song-ti-single:hover {
+								border: 1px solid #cd0000;
+								background: #cd0000;
+								border-color: #cd0000;
+							}
+
+							.song-ti-single:hover span {
+								color: #ffffff;
+							}
+
+							.song-ti-single .icon1,
+							.song-ti-single .icon2 {
+								width: 20px;
+								height: 20px;
+								display: inline-block;
+								position: relative;
+								top: 6px;
+								padding-right: 6px;
+							}
+
+							.song-ti-single .icon1 {
+								display: inline-block;
+							}
+
+							.song-ti-single .icon2 {
+								display: none;
+							}
+
+							.song-ti-single:hover .icon1 {
+								display: none;
+							}
+
+							.song-ti-single:hover .icon2 {
+								display: inline-block;
+							}
+
+							.hot-flag-single {
+								color: #cd0000;
+								border: 1px solid #cd0000;
+							}
+						</style>
+						<div id="sf-focus-2014" class="sf-focus-2014" data-spm="a214dqe">
+							<div class="layout-wrap">
+								<div class="layout-bd layout-left">
+									<div class="select-list">
+										<div class="list-box type-list">
+											<h3 class="ya-hei"><a href="#" taget="_blank"><span class="iconfont-sf">&</span>标的物类型</a></h3>
+											<ul class="song-ti">
+														<volist name="kindsResult" id="each">
+																<li>
+													<a taget="_blank" href="{:U('List/index?kinds_id='.$each[sp_json_kinds_id])}">{$each.sp_json_kinds_name}</a>
+												</li>
+														</volist>
+
+											</ul>
+										</div>
+										<div class="list-box location-list">
+											<h3 class="ya-hei"><a href="{:U('List/index')}"><span class="iconfont-sf">&#xe614;</span>标的物所在地</a></h3>
+											<ul class="song-ti">
+													<volist name="locationResult" id="location">
+												<li>
+													<a taget="_blank" href="{:U('List/index?province_id='.$location[sp_json_province_id])}">{$location.sp_json_province_name}</a>
+												</li>
+													</volist>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="layout-bd-right layout-left" style="width: 929px;" >
+
+									<style>
+										body {
+											margin: 0;
+											font-family: "微软雅黑";
+											/*background-color: #1F1F1F;*/
+										}
+
+										.example {
+											width: 650px;
+											height: 368px;
+											font-size: 40px;
+											text-align: center;
+											/*margin: 20px auto;*/
+											background-color: #464576;
+										}
+
+										.carousel-item {
+											line-height: 366px;
+											color: #fff;
+											font-family: Arial Black
+										}
+									</style>
+
+									<div class="example">
+										<div class="ft-carousel" id="carousel_1">
+											<ul class="carousel-inner">
+											<volist name="bannerResult" id="carouselValue">
+												<li class="carousel-item"><a href="details.html" target="_blank"><img src="{$carouselValue.b_pic}" /></a></li>
+												</volist>
+											</ul>
+										</div>
+									</div>
+									<script src="__PUBLIC__/Home/js/jquery-2.1.4.min.js"></script>
+									<script src="__PUBLIC__/Home/js/ft-carousel.min.js" type="text/javascript" charset="utf-8"></script>
+									<script type="text/javascript">
+										$("#carousel_1").FtCarousel();
+									</script>
+
+									<div class="right-wrap layout-left " style="float: right; margin-top: -370px;" >
+										<ul class="pai-adv">
+											<li>
+												<a href="#" target="_blank">
+													<div class="pai-text ya-hei">竞拍流程</div>
+												</a>
+											</li>
+
+										</ul>
+										<dl class="pai-help clearfix">
+											<dt class="ya-hei"><a href="#" target="_blank">帮助中心<em class="song-ti more-link">更多 <span>&gt;</span></em></a></dt>
+
+											<dd class="song-ti">
+												<a href="#" class="hot-flag" target="_blank"><em class="tag-flag" style="font-size: 20px; width: 50px; height: 20px; background-color: #E96B3A;">公告</em><span style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;查阅公告</span></a>
+											</dd>
+
+											<dd class="song-ti">
+												<a href="#" class="hot-flag" target="_blank"><em class="tag-flag" style="font-size: 20px; width: 50px; height: 20px; background-color: #E96B3A;">预约</em><span style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;预约看物</span></a>
+											</dd>
+
+											<dd class="song-ti">
+												<a href="#" class="hot-flag" target="_blank"><em class="tag-flag" style="font-size: 20px; width: 50px; height: 20px; background-color: #E96B3A;">竞拍</em><span style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;在线竞拍</span></a>
+											</dd>
+
+											<dd class="song-ti">
+												<a href="#" class="hot-flag" target="_blank"><em class="tag-flag" style="font-size: 20px; width: 50px; height: 20px; background-color: #E96B3A;">过户</em><span style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;过户交易</span></a>
+											</dd>
+
+										</dl>
+										<div class="hot-line ya-hei" style="text-align: center;padding-left:0;">客服专线 400-822-2870</div>
+									</div>
+								</div>
+							</div>
+
+							<script src="//g.alicdn.com/tb-mod/sf-focus-2014/0.0.6/index.js"></script>
+							<!--zhuyi-->
+
+							<script>
+								(function(S) {
+									S.ready(function() {
+										S.use('sf-focus-2014', function(S, Mod) {
+											new Mod('#sf-focus-2014');
+										});
+									})
+								})(KISSY);
+							</script>
+						</div>
+
+						<div class="layout-bd-right layout-left">
+							<div class="main-slide layout-left" data-tt="true">
+
+							</div>
+						</div>
+
+						<div class="index-part">
+							<div class="index-part-head"><span class="index-part-head-title">最新动态</span>
+								<a href="list.html" class="index-part-head-more" target="_blank"> 更多</a>
+							</div>
+							<ul class="index-part-body clear-both">
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loaded" style="background-image: url(img/p.jpg?x-oss-process=image/resize,h_300,w_600);">
+										<div class="index-part-item-mark index-part-item-mark-warming"><span class="index-part-item-mark-state">看样排期中</span></div> <span class="index-part-item-image-text"><p>变卖 | 成都市高新区吉泰五路88号3栋45层3号房屋</p> <!----> </span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">279万元</span></p>
+										<p>起拍时间：2018-01-03 10:00:00</p>
+										<a href="i?id=89588" class="btn btn-red index-part-item-btn" target="_blank">标的物详情</a> <small>客服热线 400-157-1060</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loaded" style="">
+										<div class="index-part-item-mark index-part-item-mark-warming"><span class="index-part-item-mark-state">看样排期中</span></div> <span class="index-part-item-image-text"><p>变卖 | 成都市龙泉驿区洛带镇玉带街162.164号1层商业用房</p> <!----> </span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">110万元</span></p>
+										<p>起拍时间：2018-01-03 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">标的物详情</a> <small>客服热线 400-157-1060</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loaded" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1513589069_303_bak.JPG?x-oss-process=image/resize,h_300,w_600&quot;);">
+										<div class="index-part-item-mark index-part-item-mark-warming"><span class="index-part-item-mark-state">看样排期中</span></div> <span class="index-part-item-image-text"><p>变卖 | 成都市龙泉驿区龙泉汇丰路23号、25号、27号1层商业用房</p> <!----> </span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">192万元</span></p>
+										<p>起拍时间：2018-01-03 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">标的物详情</a> <small>客服热线 400-157-1060</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loaded" style="background-image: url(&quot;http://laipai-img.oss-cn-hangzhou.aliyuncs.com/upload/1513587879_310_bak.png?x-oss-process=image/resize,h_300,w_600&quot;);">
+										<div class="index-part-item-mark index-part-item-mark-danger"><span class="index-part-item-mark-state">不安排看样</span></div> <span class="index-part-item-image-text"><p>一拍 | 成都市龙泉驿区同安镇锦绣路101号附1号“阳光花苑”小区A栋2单元6层2号住宅</p> <!----> </span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">55.99万元</span></p>
+										<p>起拍时间：2018-01-15 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">标的物详情</a> <small>客服热线 400-157-1060</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-warming"><span class="index-part-item-mark-state">看样排期中</span></div> <span class="index-part-item-image-text"><p>二拍 | 沈阳市铁西区南七中路32号2-8-1</p> <!----> </span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">42.11万元</span></p>
+										<p>起拍时间：2018-01-03 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">标的物详情</a> <small>客服热线 400-157-1060</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-warming"><span class="index-part-item-mark-state">看样排期中</span></div> <span class="index-part-item-image-text"><p>二拍 | 沈阳市和平区三好街90-6号单元间号14-4</p> <!----> </span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">28.28万元</span></p>
+										<p>起拍时间：2018-01-03 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">标的物详情</a> <small>客服热线 400-157-1060</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-danger"><span class="index-part-item-mark-state">不安排看样</span></div> <span class="index-part-item-image-text"><p>一拍 | 江苏省镇江市丹徒驸马山庄领山别墅紫薇园A区2幢住宅</p> <!----> </span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">430.17万元</span></p>
+										<p>起拍时间：2018-01-15 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">标的物详情</a> <small>客服热线 400-157-1060</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-warming"><span class="index-part-item-mark-state">看样排期中</span></div> <span class="index-part-item-image-text"><p>一拍 | 泗洪县圣玛可购物广场14幢106号商业房产</p> <!----> </span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">26.19万元</span></p>
+										<p>起拍时间：2018-01-19 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">标的物详情</a> <small>客服热线 400-157-1060</small></div>
+								</li>
+							</ul>
+						</div>
+						<div class="index-part">
+							<div class="index-part-head"><span class="index-part-head-title">买家最爱</span>
+								<a href="list.html" class="index-part-head-more" target="_blank"> 更多</a>
+							</div>
+							<ul class="index-part-body clear-both">
+								<p class="index-slug"><i class="material-icons vertical-top"></i>住宅 · 商铺 · 写字楼</p>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(&quot;img/lazyload.png&quot;);">
+										<div class="index-part-item-mark index-part-item-mark-danger"><span class="index-part-item-mark-state">预约已结束</span></div> <span class="index-part-item-image-text"><p>一拍 | 杭州市余杭区良渚镇逸居城逸情苑9幢2单元201室</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2017-12-08 11:00</p><p>2017-12-14 15:00</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">102万元</span></p>
+										<p>起拍时间：2017-12-18 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">标的物详情</a> <small>本标的物已有 26 人预约</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-success"><span class="index-part-item-mark-state">可预约</span></div> <span class="index-part-item-image-text"><p>一拍 | 重庆市九龙坡区谢家湾正街55号21幢1-23-6号房屋</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2017-12-07 10:00</p><p>2017-12-21 10:00</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">100万元</span></p>
+										<p>起拍时间：2017-12-25 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">看样预约</a> <small>本标的物已有 24 人预约</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-danger"><span class="index-part-item-mark-state">预约已结束</span></div> <span class="index-part-item-image-text"><p>一拍 | 重庆市江北区东升门路8号2幢14-6号房屋</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2017-12-05 10:00</p><p>2017-12-15 10:00</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">222.84万元</span></p>
+										<p>起拍时间：2017-12-18 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">标的物详情</a> <small>本标的物已有 22 人预约</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-danger"><span class="index-part-item-mark-state">预约已结束</span></div> <span class="index-part-item-image-text"><p>一拍 | 杭州市西湖区锋尚苑1幢519室</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2017-12-11 13:30</p><p>2017-12-15 13:30</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">99万元</span></p>
+										<p>起拍时间：2017-12-18 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">标的物详情</a> <small>本标的物已有 22 人预约</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-danger"><span class="index-part-item-mark-state">预约已结束</span></div> <span class="index-part-item-image-text"><p>一拍 | 义乌市秀禾小区12幢2单元201室的房地产</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2017-12-15 13:00</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">197万元</span></p>
+										<p>起拍时间：2017-12-18 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">标的物详情</a> <small>本标的物已有 22 人预约</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-success"><span class="index-part-item-mark-state">可预约</span></div> <span class="index-part-item-image-text"><p>一拍 | 邛崃市临邛镇蜚红路333号5栋2单元11楼1104号住宅</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2017-12-26 14:00</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">54.98万元</span></p>
+										<p>起拍时间：2017-12-29 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">看样预约</a> <small>本标的物已有 20 人预约</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-success"><span class="index-part-item-mark-state">可预约</span></div> <span class="index-part-item-image-text"><p>一拍 | 杭州市滨江区温馨人家23幢4单元1202室房产及房屋内家用电器、家具</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2017-12-21 10:00</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">380万元</span></p>
+										<p>起拍时间：2017-12-25 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">看样预约</a> <small>本标的物已有 18 人预约</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-success"><span class="index-part-item-mark-state">可预约</span></div> <span class="index-part-item-image-text"><p>一拍 | 沈阳市浑南新区彩霞街1-8号1-19B-4室</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2017-12-18 10:00</p><p>2017-12-22 10:00</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">46.27万元</span></p>
+										<p>起拍时间：2017-12-23 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">看样预约</a> <small>本标的物已有 18 人预约</small></div>
+								</li>
+							</ul>
+							<ul class="index-part-body clear-both">
+								<p class="index-slug"><i class="material-icons vertical-top"></i>机动车</p>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-success"><span class="index-part-item-mark-state">可预约</span></div> <span class="index-part-item-image-text"><p>一拍 | 苏NNQ926本田思域牌小型轿车一辆</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2017-12-20 14:30</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">3.85万元</span></p>
+										<p>起拍时间：2017-12-23 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">看样预约</a> <small>本标的物已有 4 人预约</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-success"><span class="index-part-item-mark-state">可预约</span></div> <span class="index-part-item-image-text"><p>一拍 | 未上牌宝马牌小型越野客车一辆</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2017-12-27 14:30</p><p>2017-12-22 15:00</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">35万元</span></p>
+										<p>起拍时间：2017-12-28 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">看样预约</a> <small>本标的物已有 4 人预约</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-success"><span class="index-part-item-mark-state">可预约</span></div> <span class="index-part-item-image-text"><p>一拍 | 车牌为浙K1715G宝马牌轿车</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2017-12-20 10:00</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">16万元</span></p>
+										<p>起拍时间：2017-12-21 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">看样预约</a> <small>本标的物已有 3 人预约</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-success"><span class="index-part-item-mark-state">可预约</span></div> <span class="index-part-item-image-text"><p>一拍 | 苏HGU505本田雅阁小型客车</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2018-01-03 11:00</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">5.96万元</span></p>
+										<p>起拍时间：2018-01-06 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">看样预约</a> <small>本标的物已有 3 人预约</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-danger"><span class="index-part-item-mark-state">预约已结束</span></div> <span class="index-part-item-image-text"><p>一拍 | 车牌号为浙G999DJ号汽车一辆</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2017-12-18 10:00</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">24.20万元</span></p>
+										<p>起拍时间：2017-12-20 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">标的物详情</a> <small>本标的物已有 2 人预约</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-danger"><span class="index-part-item-mark-state">预约已结束</span></div> <span class="index-part-item-image-text"><p>一拍 | 车牌号为皖PF3606号汽车一辆</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2017-12-18 10:00</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">6.84万元</span></p>
+										<p>起拍时间：2017-12-20 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">标的物详情</a> <small>本标的物已有 2 人预约</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-success"><span class="index-part-item-mark-state">可预约</span></div> <span class="index-part-item-image-text"><p>一拍 | 川 AV2W12 别克 GL8 2011 款 2.4L LT 豪华商务行政版</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2017-12-20 10:00</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">12.38万元</span></p>
+										<p>起拍时间：2017-12-24 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">看样预约</a> <small>本标的物已有 2 人预约</small></div>
+								</li>
+								<li>
+									<a href="details.html" class="index-part-item-image bg" target="_blank" lazy="loading" style="background-image: url(" image/lazyload.png ");">
+										<div class="index-part-item-mark index-part-item-mark-success"><span class="index-part-item-mark-state">可预约</span></div> <span class="index-part-item-image-text"><p>一拍 | 车牌号为浙E00397号汽车一辆</p> <p class="index-part-item-image-text-kanyang">看样时间：</p> <p>2017-12-25 10:00</p></span></a>
+									<div class="index-part-item-text">
+										<p>起  拍  价：<span class="color-red" style="font-size: 1.1em;">22.20万元</span></p>
+										<p>起拍时间：2017-12-26 10:00:00</p>
+										<a href="details.html" class="btn btn-red index-part-item-btn" target="_blank">看样预约</a> <small>本标的物已有 2 人预约</small></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<footer>
+					<div class="container position-relative">
+						<div class="footer-widge">
+							<a class="back-top-btn" style="display: none;"><i class="material-icons"></i></a>
+						</div>
+						<div class="footer-head">
+							<a href="#" target="_blank">后台入口</a>
+							<a href="#">关于我们</a>
+							<a href="cooperation.html" class="" target="_blank">联系我们</a>
+							<a href="#">招聘专区</a>
+							<a href="#">网站地图</a>
+							<!--<a href="news" class="" target="_blank">司法网拍资讯</a>-->
+							<span class="float-right">
+								<i class="material-icons color-white" style="margin-right: 15px;">T</i>
+								<span class="vertical-middle" style="font-size: 1.3em;">400 - 157 - 1060</span></span>
+						</div>
+						<div class="footer-body i-tab">
+							<div class="footer-tab common-tab">
+								<a class="footer-tab-btn common-tab-btn footer-tab-btn-active">热门城市</a>
+								<a class="footer-tab-btn common-tab-btn">热门搜索</a>
+							</div>
+							<div class="footer-tab-item common-tab-item">
+								<a href=" " title="北京" target="_self">北京</a>
+								<a href=" " title="上海" target="_self">上海</a>
+								<a href=" " title="广州" target="_self">广州</a>
+								<a href=" " title="杭州" target="_self">杭州</a>
+								<a href=" " title="宁波" target="_self">宁波</a>
+								<a href=" " title="天津" target="_self">天津</a>
+								<a href=" " title="南京" target="_self">南京</a>
+								<a href=" " title="合肥" target="_self">合肥</a>
+								<a href=" " title="苏州" target="_self">苏州</a>
+								<a href=" " title="无锡" target="_self">无锡</a>
+								<a href=" " title="福州" target="_self">福州</a>
+								<a href=" " title="重庆" target="_self">重庆</a>
+								<a href=" " title="长沙" target="_self">长沙</a>
+								<a href=" " title="长春" target="_self">长春</a>
+								<a href=" " title="成都" target="_self">成都</a>
+								<a href=" " title="常州" target="_self">常州</a>
+								<a href=" " title="大连" target="_self">大连</a>
+								<a href=" " title="海口" target="_self">海口</a>
+								<a href=" " title="贵阳" target="_self">贵阳</a>
+								<a href=" " title="济南" target="_self">济南</a>
+								<a href=" " title="兰州" target="_self">兰州</a>
+								<a href=" " title="哈尔滨" target="_self">哈尔滨</a>
+								<a href=" " title="呼和浩特" target="_self">呼和浩特</a>
+								<a href=" " title="昆明" target="_self">昆明</a>
+								<a href=" " title="拉萨" target="_self">拉萨</a>
+								<a href=" " title="嘉兴" target="_self">嘉兴</a>
+								<a href=" " title="南昌" target="_self">南昌</a>
+								<a href=" " title="南宁" target="_self">南宁</a>
+								<a href=" " title="石家庄" target="_self">石家庄</a>
+								<a href=" " title="沈阳" target="_self">沈阳</a>
+								<a href=" " title="太原" target="_self">太原</a>
+								<a href=" " title="绍兴" target="_self">绍兴</a>
+								<a href=" " title="武汉" target="_self">武汉</a>
+								<a href=" " title="西安" target="_self">西安</a>
+								<a href=" " title="西宁" target="_self">西宁</a>
+								<a href=" " title="乌鲁木齐" target="_self">乌鲁木齐</a>
+								<a href=" " title="郑州" target="_self">郑州</a>
+							</div>
+							<!---->
+						</div>
+						<div class="footer-footer">
+							<a href="http://www.chinacourt.org/index.shtml" target="_blank" rel="nofollow">中国法院网</a>
+							<a href="http://www.zjcourt.cn/" target="_blank" rel="nofollow">浙江法院新闻网</a>
+							<a href="http://shfy.chinacourt.org/index.shtml" target="_blank" rel="nofollow">上海法院网</a>
+							<a href="http://www.jsfy.gov.cn/" target="_blank" rel="nofollow">江苏法院网</a>
+							<a href="http://bjgy.chinacourt.org/index.shtml" target="_blank" rel="nofollow">北京法院网</a>
+							<a href="http://www.gdcourts.gov.cn/gdgy/s" target="_blank" rel="nofollow">广东法院网</a>
+							<a href="http://www.tmsf.com/" target="_blank" rel="nofollow">透明售房网</a>
+							<a href="http://www.zjpse.com/" target="_blank" rel="nofollow">浙江产权交易所</a>
+							<a href="http://www.cbex.com.cn/" target="_blank" rel="nofollow">北京产权交易所</a>
+						</div>
+						<div class="copyright">
+							<p>© Copyright 2016 laipaiya.com 版权所有 杭州网络科技有限公司 | 浙ICP备15004499号-1 |
+								<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602002655">浙公网安备 33010602002655号</a>
+							</p>
+						</div>
+					</div>
+				</footer>
+			</div>
+			<!---->
+			<!---->
+			<!---->
+		</div>
+
+	</body>
+
+</html>

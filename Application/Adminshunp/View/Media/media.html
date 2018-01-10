@@ -1,0 +1,49 @@
+<include file="Common/header" />
+<script>
+    //文件上传插件
+    KindEditor.ready(function(K) {
+        editor = K.create('textarea[name="i_text1"]', {
+            allowFileManager : true
+        });
+    });
+</script>
+	<div id="right-content">
+		<div class="top">
+			<h2>艺术传媒 <small>巴蜀传媒</small></h2>
+		</div>
+
+		<form action="__ACTION__" method="post">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>设置项</th>
+						<th>设置值</th>
+					</tr>
+				</thead>
+
+				<tr>
+					<td width="150">文章标题</td>
+					<td>
+						<input type="text" name="i_title1" class="form-control w400" value="{$data['i_title1']}"  placeholder="" >
+					</td>
+				</tr>
+
+                <tr>
+                    <td>文章内容</td>
+                    <td>
+                        <textarea name="i_text1"  class="description_box" style="height: 400px;">{$data.i_text1}</textarea>
+                    </td>
+                </tr>
+				<tr>
+					<td></td>
+					<td>
+						<button type="submit" class="btn btn-primary w100">修改</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</div>
+
+<include file="Common/footer" />

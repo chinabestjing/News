@@ -1,0 +1,56 @@
+<include file="Common/header" />
+
+        <script>
+            KindEditor.ready(function(K) {
+                editor = K.create('textarea[name="i_text1"]', {
+                    allowFileManager : true
+                });
+            });
+        </script>
+	<div id="right-content">
+		<div class="top">
+			<h2>r人力资源 <small>人才理念</small></h2>
+		</div>
+        <!-- 载入上传文件 -->
+		<form action="__ACTION__" method="post" id="goods_add">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>设置项</th>
+						<th>设置值</th>
+					</tr>
+				</thead>
+				
+				<tr>
+					<td width="150">标题</td>
+					<td>
+						<input type="text" name="i_title1" class="form-control w400 fl" value="{$data['i_title1']}">
+						<b class="fl ml10 mt10" style="color: red;">*</b>
+					</td>
+				</tr>
+				<tr>
+                    <td>内容</td>
+                    <td>
+                        <div class="col-sm-10">
+                            <textarea name="i_text1" style="width:800px;height:400px;visibility:hidden;">{$data.i_text1}</textarea>
+                            <p>
+                                <input type="button" name="clear" value="清空内容" />
+                                <input type="reset" name="reset" value="Reset" />
+                            </p>
+                           <!-- <script type="text/plain" id="container" name="i_text1" style="width:100%;height:500px;">{$data.i_text1}</script>-->
+                        </div>
+                    </td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<button type="submit" class="btn btn-primary w100">提交</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</div>
+
+<include file="Common/footer" />

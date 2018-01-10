@@ -1,0 +1,42 @@
+<include file="Common/header" />
+	<div id="right-content">
+		<div class="top">
+			<h2>welcome</h2>
+		</div>
+		
+		<form action="" method="post">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					
+				</table>
+			</div>
+			<a href="{:U('Index/update_cache')}" class="btn btn-primary w200">更新数据库缓存(全部)</a><br/><br/>
+            <a href="{:U('Index/update_cache_kinds',array('id'=>'index'))}" class="btn btn-primary w80">首页</a>
+            <a href="{:U('Index/update_cache_kinds',array('id'=>'group'))}" class="btn btn-primary w80">集团介绍</a>
+            <a href="{:U('Index/update_cache_kinds',array('id'=>'news'))}" class="btn btn-primary w80">新闻中心</a>
+            <a href="{:U('Index/update_cache_kinds',array('id'=>'school'))}" class="btn btn-primary w80">艺术教育</a>
+            <a href="{:U('Index/update_cache_kinds',array('id'=>'trade'))}" class="btn btn-primary w80">艺术交易</a>
+            <a href="{:U('Index/update_cache_kinds',array('id'=>'media'))}" class="btn btn-primary w80">艺术传媒</a>
+            <a href="{:U('Index/update_cache_kinds',array('id'=>'culture'))}" class="btn btn-primary w80">文化活动</a>
+            <a href="{:U('Index/update_cache_kinds',array('id'=>'contact'))}" class="btn btn-primary w80">联系我们</a>
+            <a href="{:U('Index/update_cache_kinds',array('id'=>'resource'))}" class="btn btn-primary w80">人力资源</a>
+            <hr />
+            <hr  />
+            <a href="{:U('Index/html',array('id'=>'html'))}" class="btn btn-primary w200">更新静态缓存(全部)</a><br/><br/>
+            <a href="{:U('Index/model',array('id'=>'Index'))}" class="btn btn-primary w80">首页</a>
+            <a href="{:U('Index/model',array('id'=>'Group'))}" class="btn btn-primary w80">集团介绍</a>
+            <a href="{:U('Index/model',array('id'=>'News'))}" class="btn btn-primary w80">新闻中心</a>
+            <a href="{:U('Index/model',array('id'=>'School'))}" class="btn btn-primary w80">艺术教育</a>
+            <a href="{:U('Index/model',array('id'=>'Trade'))}" class="btn btn-primary w80">艺术交易</a>
+            <a href="{:U('Index/model',array('id'=>'Media'))}" class="btn btn-primary w80">艺术传媒</a>
+            <a href="{:U('Index/model',array('id'=>'Culture'))}" class="btn btn-primary w80">文化活动</a>
+            <a href="{:U('Index/model',array('id'=>'Contact'))}" class="btn btn-primary w80">联系我们</a>
+            <a href="{:U('Index/model',array('id'=>'Resource'))}" class="btn btn-primary w80">人力资源</a>
+		</form>
+   <!--     <form action="__CONTROLLER__/upload" enctype="multipart/form-data" method="post" >
+            <input type="file" name="file" />
+            <input type="submit" value="提交" >
+        </form>-->
+	</div>
+<include file="Common/footer" />
+

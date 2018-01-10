@@ -1,0 +1,71 @@
+<include file="Common/header" />
+<div id="right-content">
+    <div class="top">
+        <h2>集团介绍 <small>设置</small></h2>
+    </div>
+
+    <ul class="nav nav-tabs mt10">
+        <li role="presentation">
+            <a href="__CONTROLLER__/teamAdd">添加人员</a>
+        </li>
+    </ul>
+
+    <form action="" method="post">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>成员姓名</th>
+                    <th>性别</th>
+                    <th>成员职位</th>
+                    <th>成员学历</th>
+                    <th>成员排序</th>
+                    <th>成员添加时间</th>
+                    <th>成员状态</th>
+                    <th width="200">操作</th>
+                </tr>
+                </thead>
+
+                <volist name="data" id="v">
+                    <tr>
+                        <td>{$i}</td>
+                        <td>{$v.m_name}</td>
+                        <td>
+                            <if condition="$v.m_sex eq 1 ">
+                                <span style="color:red;">女</span>
+                                <else />
+                                <span style="color:blue;">男</span>
+                            </if>
+                        </td>
+                        <td>{$v.m_position}</td>
+                        <td>{$v.m_study}</td>
+                        <td>{$v.m_order}</td>
+                        <td>{$v.m_time|date='Y-m-d H:i:s',###}</td>
+                        <td>
+                            <if condition="$v.m_state eq 1 ">
+                                <span style="color:blue;">在职</span>
+                                <else />
+                                <span style="color:red;">离职</span>
+                            </if>
+                        </td>
+                        <td class="handle">
+                            <a href="{:U('Group/teamCheck',array('id'=>$v['m_id'],'key'=>$v['m_state']))}" class="edit"><i class="glyphicon glyphicon-pencil"></i>切换</a>
+                            <a href="{:U('Group/teamUpdate',array('id'=>$v['m_id']))}" class="edit"><i class="glyphicon glyphicon-pencil"></i>修改</a>
+                            <a href="javascript:;" class="del" onclick="if(confirm('确定删除吗？')) location.href='{:U('Group/teamDel', array('id'=>$v['m_id']))}'">
+                                <i class="glyphicon glyphicon-trash"></i>删除
+                            </a>
+                        </td>
+                    </tr>
+                </volist>
+                <tr>
+                    <td colspan="10" align="right"><span style="color: green;">{$page}</span></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+
+<include file="Common/footer" />
+
+

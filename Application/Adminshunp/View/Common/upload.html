@@ -1,0 +1,26 @@
+<!-- 载入上传文件 -->
+<script src="__PUBLIC__/Common/uploadify/jquery.uploadify.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Common/uploadify/uploadify.css">
+
+<!-- 上传配置 -->
+<script>
+'<?php $timestamp = time();?>';
+$(function(){
+	$('#file_upload').uploadify({
+		'formData'     : {
+			'timestamp'	: '<?php echo $timestamp?>',
+			'token'     : '<?php echo md5(C("UP_KEY") . $timestamp);?>',
+		},
+		'swf'      		: '__PUBLIC__/Common/uploadify/uploadify.swf',
+		'uploader' 		: '{:U("Upload/up")}',
+		"buttonText" 	: "上传图片",
+		"fileObjName"     : "up",
+		"width"           : 120,
+		'fileTypeExts'    : '*.jpg; *.png; *.gif; *.jpeg;',
+		"onUploadSuccess" : upcallback,
+		'onFallback' : function() {
+            alert('未检测到兼容版本的Flash.');
+        }
+	});
+})
+</script>

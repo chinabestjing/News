@@ -1,0 +1,146 @@
+<include file="Common/header" />
+<link rel="stylesheet" href="__PUBLIC__/page.css" />
+<div id="right-content">
+    <div class="top">
+        <h2>新闻管理 <small>行业新闻</small></h2>
+    </div>
+    <ul class="nav nav-tabs mt10">
+        <li role="presentation">
+            <a href="__CONTROLLER__/add" >发布新闻</a>
+        </li>
+    </ul>
+    <form action="" method="post">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>新闻ID</th>
+                 <!--   <th>发布人</th>-->
+                    <th>新闻标题</th>
+                  <!--  <th>阅读量</th>
+                    <th>点赞量</th>-->
+                    <th>是否上架</th>
+                    <th>是否栏目头条</th>
+                    <th>是否新闻头条</th>
+                    <th>添加时间</th>
+                    <th width="200">操作</th>
+                </tr>
+                </thead>
+                <volist name="data" id="vo">
+                    <tr>
+                        <td>{$vo.n_id}</td>
+                        <td>{$vo.n_title}</td>
+                        <td>
+                            <eq name="vo.n_state" value="1">
+                                <span style="cursor:pointer;" class="label label-success f12">上架</span>
+                                <else />
+                                <span style="cursor:pointer;" class="label label-danger f12">下架</span>
+                            </eq>
+                        </td>
+                        <td>
+                            <eq name="vo.is_itop" value="1">
+                                <span style="cursor:pointer;" class="label label-success f12">是</span>
+                                <else />
+                                <span style="cursor:pointer;" class="label label-danger f12">否</span>
+                            </eq>
+                        </td>
+                        <td>
+                            <eq name="vo.is_top" value="1">
+                                <span style="cursor:pointer;" class="label label-success f12">是</span>
+                                <else />
+                                <span style="cursor:pointer;" class="label label-danger f12">否</span>
+                            </eq>
+                        </td>
+
+                        <td>{$vo.n_time|date='Y-m-d H:i:s',###}</td>
+                        <td class="handle">
+                            <a href="{:U('News/stateCheck',array('n_id'=>$vo['n_id'],'n_state'=>$vo['n_state']))}" class="edit"><i class="glyphicon glyphicon-pencil"></i>上下架</a>
+                            <if condition="$vo['is_top'] eq 0 "><a href="{:U('News/xinwenCheck',array('n_id'=>$vo['n_id'],'is_top'=>$vo['is_top']))}" class="edit"><i class="glyphicon glyphicon-pencil"></i>新闻头条</a></if>
+
+                            <if condition="$vo['is_itop'] eq 0 "><a href="{:U('News/lanmuCheck2',array('n_id'=>$vo['n_id'],'is_itop'=>$vo['is_itop']))}" class="edit"><i class="glyphicon glyphicon-pencil"></i>栏目头条</a></if>
+                            <a href="{:U('News/edit',array('n_id'=>$vo['n_id']))}" class="edit"><i class="glyphicon glyphicon-pencil"></i>编辑</a>
+                            <a href="javascript:;" class="del" onclick="if(confirm('确定删除吗？')) location.href='{:U('News/del', array('n_id'=>$vo['n_id']))}'">
+                                <i class="glyphicon glyphicon-trash"></i>删除
+                            </a>
+                        </td>
+                    </tr>
+                </volist>
+                <tr>
+                    <div class="meneame">{$page}</div>
+                </tr>
+            </table>
+            <div class="meneame">{$page}</div>
+        </div>
+    </form>
+</div>
+
+
+
+<include file="Common/footer" />
+      <!--  <script>
+            $(".state").each(function(){
+                $(this).click(function(){
+                    var id = $(this).attr('tags');
+                    var value = $(this).attr('value');
+                    $.post("{:U('News/stateCheck')}", {id:id,value:value}, function (text, status) {
+                        var state1 = text['n_state'];
+                        var id1 = text['id'];
+                        if(text['n_state'] == 1){
+                            $("[tags='"+id1+"']").html(' <span style="cursor:pointer;" class="label label-success f12">上架</span>');
+                            $("[tags='"+id1+"']").attr('value',state1);
+                           // $('"tags=['+id1+']"').html(' <span class="label label-success f12">上架</span>');
+                           // $(this).html(' <span class="label label-success f12">上架</span>');
+                        }else{
+                            $("[tags='"+id1+"']").html('<span style="cursor:pointer;" class="label label-danger f12">下架</span>');
+                            $("[tags='"+id1+"']").attr('value',state1);
+                           // $(this).html('<span class="label label-danger f12">下架</span>');
+                        }
+                    });
+                });
+            });
+            $(".lanmu").each(function(){
+                $(this).click(function(){
+                    var id = $(this).attr('tags1');
+                    var value = $(this).attr('value');
+                   // alert(value);
+                    $.post("{:U('News/lanmuCheck')}", {id:id,value:value}, function (text, status) {
+                        var state1 = text['n_state'];
+                        var id1 = text['id'];
+                       // alert(id1);
+
+                        if(text['n_state'] == 1){
+                            $("[tags1='"+id1+"']").html('  <span style="cursor:pointer;" class="label label-success f12">是</span>');
+                            $("[tags1='"+id1+"']").attr('value',state1);
+                            // $('"tags=['+id1+']"').html(' <span class="label label-success f12">上架</span>');
+                            // $(this).html(' <span class="label label-success f12">上架</span>');
+                        }else{
+                            $("[tags1='"+id1+"']").html('  <span style="cursor:pointer;" class="label label-danger f12">否</span>');
+                            $("[tags1='"+id1+"']").attr('value',state1);
+                            // $(this).html('<span class="label label-danger f12">下架</span>');
+
+                        }
+                    });
+                });
+
+            });
+            $(".xinwen").each(function(){
+                $(this).click(function(){
+                    var id = $(this).attr('tags2');
+                    var value = $(this).attr('value');
+                    $.post("{:U('News/xinwenCheck')}", {id:id,value:value}, function (text, status) {
+                        var state1 = text['n_state'];
+                        var id1 = text['id'];
+                        if(text['n_state'] == 1){
+                            $("[tags2='"+id1+"']").html('  <span style="cursor:pointer;" class="label label-success f12">是</span>');
+                            $("[tags2='"+id1+"']").attr('value',state1);
+                            // $('"tags=['+id1+']"').html(' <span class="label label-success f12">上架</span>');
+                            // $(this).html(' <span class="label label-success f12">上架</span>');
+                        }else{
+                            $("[tags2='"+id1+"']").html('  <span style="cursor: pointer;" class="label label-danger f12">否</span>');
+                            $("[tags2='"+id1+"']").attr('value',state1);
+                            // $(this).html('<span class="label label-danger f12">下架</span>');
+                        }
+                    });
+                });
+            });
+        </script>-->

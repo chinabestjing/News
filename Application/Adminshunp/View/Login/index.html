@@ -1,0 +1,26 @@
+<include file="Common/header" />
+	<div id="loginbox">
+		<div class="box">
+			<h2>Manage Center Login</h2>
+			<form action="" method="post">
+				<div class="form-group">
+					<input type="text" name="username" class="form-control" placeholder="Username">
+				</div>
+				<div class="form-group">
+					<input type="password" name="password" class="form-control" placeholder="Password">
+				</div>
+				<div class="form-group clearfix">
+					<input type="text" name="code" class="form-control w150 fl" placeholder="Code">
+					<a href="javascript:;"><img src="{:U('Login/code')}" onclick="this.src = this.src + '?' + Math.random()" class="fl ml10"></a>
+				</div>
+				<button type="submit" class="btn btn-primary bc w100">Log In</button>
+			</form>
+		</div>
+	</div>
+
+	<script>
+		$(function(){
+			$('#loginbox').height($(window).height());
+		})
+	</script>
+<include file="Common/footer" />

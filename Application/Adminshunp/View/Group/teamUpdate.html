@@ -1,0 +1,108 @@
+<include file="Common/header" />
+<script>
+    //文件上传插件
+    KindEditor.ready(function(K) {
+        var editor = K.editor({
+            allowFileManager : true
+        });
+        K('#image1').click(function() {
+            editor.loadPlugin('image', function() {
+                editor.plugin.imageDialog({
+                    imageUrl : K('#url1').val(),
+                    clickFn : function(url, title, width, height, border, align) {
+                        K('#url1').val(url);
+                      //  alert(url);
+                        $('<img style="width:150px;height:150px;" img src="'+url+'"/>').appendTo(".up_box");
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });
+    });
+</script>
+	<div id="right-content">
+		<div class="top">
+			<h2>集团介绍 <small>设置</small></h2>
+		</div>
+
+		<form action="__ACTION__" method="post">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>设置项</th>
+						<th>设置值</th>
+					</tr>
+				</thead>
+				<tr>
+					<td width="150">用户名</td>
+					<td>
+						<input type="text" name="m_name" class="form-control w400" value="{$data['m_name']}"  placeholder="名称设置" >
+					</td>
+				</tr>
+				<tr>
+					<td width="150">职位</td>
+					<td>
+						<input type="text" name="m_position" class="form-control w400" value="{$data['m_position']}"  placeholder="请填入该同事的职位" >
+					</td>
+				</tr>
+                <tr>
+                    <td width="150">学历</td>
+                    <td>
+                        <input type="text" name="m_study" class="form-control w400" value="{$data['m_study']}"  placeholder="请填入该同事的学历" >
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150">排序（数字越大越靠前）</td>
+                    <td>
+                        <input type="number" name="m_order" class="form-control w400" value="{$data['m_order']}"  placeholder="" >
+                    </td>
+                </tr>
+				<tr>
+					<td>性别</td>
+					<td>
+						<div class="radio">
+							<label>
+								<input type="radio" name="m_sex" <if condition="$data['m_sex'] eq 1">checked="checked"</if> value="1"> 女
+							</label>
+							<label>
+								<input type="radio" name="m_sex" <if condition="$data['m_sex'] eq 0">checked="checked"</if> value="0"> 男
+							</label>
+						</div>
+					</td>
+				</tr>
+                <tr>
+                    <td>简介</td>
+                    <td>
+                        <textarea name="m_intro">{$data.m_intro}</textarea>
+                    </td>
+                </tr>
+				<tr>
+					<td>用户照片</td>
+					<td>
+						<!-- 图片上传 begin -->
+						<div class="up_box">
+                            <p>
+                                <input type="text" readonly name="m_pic" id="url1" value="{$data['m_pic']}" />
+                                <input type="button" id="image1" value="选择图片" />（网络图片 + 本地上传）
+                            </p>
+                            <p id="pic1"></p>
+							<img src="{$data['m_pic']}" alt="" width="150">
+						</div>
+						<include file="Common/upload" />
+						<!-- 图片上传 end -->
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="hidden" name="m_id" value="{$data['m_id']}">
+						<button type="submit" class="btn btn-primary w100">修改</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</div>
+
+<include file="Common/footer" />

@@ -1,0 +1,87 @@
+<include file="Common/header" />
+<script>
+    //文件上传插件
+    KindEditor.ready(function(K) {
+        editor = K.create('textarea[name="i_text1"]', {
+            allowFileManager : true
+        });
+        var editor = K.editor({
+            allowFileManager : true
+        });
+        K('#image1').click(function() {
+            editor.loadPlugin('image', function() {
+                editor.plugin.imageDialog({
+                    imageUrl : K('#url1').val(),
+                    clickFn : function(url, title, width, height, border, align) {
+                        K('#url1').val(url);
+                      //  alert(url);
+                        $('<img style="width:150px;height:150px;" img src="'+url+'"/>').appendTo(".up_box");
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });
+    });
+</script>
+	<div id="right-content">
+		<div class="top">
+			<h2>艺术交易 <small>艺链国际</small></h2>
+		</div>
+
+		<form action="__ACTION__" method="post">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>设置项</th>
+						<th>设置值</th>
+					</tr>
+				</thead>
+				<tr>
+					<td width="150">链接地址设置（http://）</td>
+					<td>
+						<input type="text" name="i_url" class="form-control w400" value="{$data['i_url']}"  placeholder="名称设置" >
+					</td>
+				</tr>
+				<tr>
+					<td width="150">文章标题</td>
+					<td>
+						<input type="text" name="i_title1" class="form-control w400" value="{$data['i_title1']}"  placeholder="请填入该同事的职位" >
+					</td>
+				</tr>
+
+                <tr>
+                    <td>文章内容</td>
+                    <td>
+                        <textarea name="i_text1"  class="description_box" style="height: 400px;">{$data.i_text1}</textarea>
+                    </td>
+                </tr>
+				<tr>
+					<td>用户照片</td>
+					<td>
+						<!-- 图片上传 begin -->
+						<div class="up_box">
+                            <p>
+                                <input type="text" readonly name="i_pics" id="url1" value="{$data['i_pics']}" />
+                                <input type="button" id="image1" value="选择图片" />（网络图片 + 本地上传）
+                            </p>
+                            <p id="pic1"></p>
+							<img src="{$data['i_pics']}" alt="" width="150">
+						</div>
+						<include file="Common/upload" />
+						<!-- 图片上传 end -->
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+
+						<button type="submit" class="btn btn-primary w100">修改</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</div>
+
+<include file="Common/footer" />

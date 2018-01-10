@@ -1,0 +1,77 @@
+<include file="Common/header" />
+<script>
+    //文件上传插件
+    KindEditor.ready(function(K) {
+        var editor = K.editor({
+            allowFileManager : true
+        });
+        K('#image1').click(function() {
+            editor.loadPlugin('image', function() {
+                editor.plugin.imageDialog({
+                    imageUrl : K('#url1').val(),
+                    clickFn : function(url, title, width, height, border, align) {
+                        K('#url1').val(url);
+                      //  alert(url);
+                        $('<img style="width:150px;height:150px;" img src="'+url+'"/>').appendTo(".up_box");
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });
+    });
+</script>
+	<div id="right-content">
+		<div class="top">
+			<h2>轮播图管理 <small>设置</small></h2>
+		</div>
+
+		<form action="__ACTION__" method="post">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>设置项</th>
+						<th>设置值</th>
+					</tr>
+				</thead>
+				<tr>
+					<td width="150">链接地址设置（http://）</td>
+					<td>
+						<input type="text" name="b_url" class="form-control w400" value="{$data['i_url']}"  placeholder="名称设置" >
+					</td>
+				</tr>
+				<tr>
+					<td width="150">轮播图标题</td>
+					<td>
+						<input type="text" name="b_pic_text" class="form-control w400" value="{$data['i_title1']}"  placeholder="轮播图设置" >
+					</td>
+				</tr>
+
+				<tr>
+					<td>banner图片(1260X369)</td>
+					<td>
+						<!-- 图片上传 begin -->
+						<div class="up_box">
+                            <p>
+                                <input type="text" readonly class="form-control w400" name="b_pic" id="url1" value="{$data['i_pics']}" />
+                                <input type="button" id="image1" value="选择图片" />（网络图片 + 本地上传）
+                            </p>
+                            <p id="pic1"></p>
+						</div>
+						<include file="Common/upload" />
+						<!-- 图片上传 end -->
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+
+						<button type="submit" class="btn btn-primary w100">修改</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</form>
+	</div>
+
+<include file="Common/footer" />

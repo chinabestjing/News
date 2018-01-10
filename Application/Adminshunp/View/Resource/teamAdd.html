@@ -1,0 +1,50 @@
+<include file="Common/header" />
+<script>
+    //文件上传插件
+    KindEditor.ready(function(K) {
+        editor = K.create('textarea[name="w_text"]', {
+            allowFileManager : true
+        });
+    });
+</script>
+<div id="right-content">
+    <ul class="nav nav-tabs mt10">
+        <li role="presentation">
+            <a href="javascript:;" class="active">添加招聘人员</a>
+        </li>
+    </ul>
+
+    <form action="__ACTION__" method="post">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>设置项</th>
+                    <th>设置值</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>职位</td>
+                    <td>
+                        <input type="text"  name="w_title" class="form-control w400" value="" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>职位简介、条件</td>
+                    <td>
+                       <textarea name="w_text"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="submit" class="btn btn-primary w100">编辑</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+
+<include file="Common/footer" />
